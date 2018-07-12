@@ -1,5 +1,6 @@
 package com.example.azia.diplom;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -7,6 +8,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -54,11 +56,20 @@ public class ScheduleActivity extends AppCompatActivity {
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
 
         FloatingActionButton fab = findViewById(R.id.fab);
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                //ItemFragment testFragment = new ItemFragment();
+                //transaction.replace(R.id.container, testFragment);
+                //transaction.commit();
+                Intent intent = new Intent();
+                intent.setClass(ScheduleActivity.this, AddScheduleActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -116,23 +127,28 @@ public class ScheduleActivity extends AppCompatActivity {
                 case 1:
                     Monday1Fragment bf2 = new Monday1Fragment();
                     b = new Bundle();
-                    b.putString("tabID", "1");
+                    b.putString("tabID", "2");
                     return bf2;
                 case 2:
                     Monday1Fragment bf3 = new Monday1Fragment();
                     b = new Bundle();
-                    b.putString("tabID", "1");
+                    b.putString("tabID", "3");
                     return bf3;
                 case 3:
                     Monday1Fragment bf4 = new Monday1Fragment();
                     b = new Bundle();
-                    b.putString("tabID", "1");
+                    b.putString("tabID", "4");
                     return bf4;
                 case 4:
                     Monday1Fragment bf5 = new Monday1Fragment();
                     b = new Bundle();
-                    b.putString("tabID", "1");
+                    b.putString("tabID", "5");
                     return bf5;
+                case 5:
+                    Monday1Fragment bf6 = new Monday1Fragment();
+                    b = new Bundle();
+                    b.putString("tabID", "6");
+                    return bf6;
 
                 default:
                     return null;
@@ -142,7 +158,7 @@ public class ScheduleActivity extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 5;
+            return 6;
         }
     }
 }
