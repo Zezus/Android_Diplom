@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,7 @@ public class Monday1Fragment extends ListFragment {
     DBScheduleHelper dataBaseHelper;
     SQLiteDatabase sqLiteDatabase;
     Cursor cursor;
+    private ScheduleListAdapter scheduleListAdapter;
     private ArrayList<ScheduleList> scheduleLists;
 
     public Monday1Fragment() {
@@ -35,8 +37,10 @@ public class Monday1Fragment extends ListFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_monday1, container, false);
-        mList = view.findViewById(android.R.id.list);
 
+
+        mList = view.findViewById(R.id.l_rv);
+        mList.setLayoutManager(new LinearLayoutManager(getContext()));
         scheduleLists = new ArrayList<>();
 
         dataBaseHelper = new DBScheduleHelper(getContext());
@@ -62,7 +66,10 @@ public class Monday1Fragment extends ListFragment {
             } while (cursor.moveToNext());
         }
 
-
+        mList.setAdapter(new ScheduleListAdapter(getContext(), scheduleLists, (ScheduleActivity) getActivity()));
+        scheduleListAdapter = (new ScheduleListAdapter(getContext(), scheduleLists, (ScheduleActivity) getActivity()));
+        scheduleListAdapter.notifyDataSetChanged();
+        mList.setAdapter(scheduleListAdapter);
         return view;
     }
 

@@ -58,7 +58,7 @@ public class DBScheduleHelper extends SQLiteOpenHelper {
 
     public Cursor getInfo(SQLiteDatabase db) {
         Cursor cursor;
-        String[] arr_Strings = {FULL_OBJECT_COLUMN, FULL_ROOM_COLUMN, FULL_TIMESTART_COLUMN, FULL_TIMEEND_COLUMN};
+        String[] arr_Strings = {FULL_OBJECT_COLUMN, FULL_ROOM_COLUMN, FULL_TIMESTART_COLUMN, FULL_TIMEEND_COLUMN, FULL_DAY_COLUMN};
         cursor = db.query(LISTS_TABLE, arr_Strings, null, null, null, null, null);
         return cursor;
 
