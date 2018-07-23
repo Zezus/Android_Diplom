@@ -55,14 +55,15 @@ public class Monday1Fragment extends ListFragment {
                 time_start = cursor.getString(2);
                 time_end = cursor.getString(3);
                 day = cursor.getString(4);
-                ScheduleList schedule1 = new ScheduleList();
-                schedule1.setObject(object);
-                schedule1.setRoom(room);
-                schedule1.setTime_start(time_start);
-                schedule1.setTime_end(time_end);
-                schedule1.setDay(day);
-                scheduleLists.add(schedule1);
-
+                if (day.equals("Понедельник")) {
+                    ScheduleList schedule1 = new ScheduleList();
+                    schedule1.setObject(object);
+                    schedule1.setRoom(room);
+                    schedule1.setTime_start(time_start);
+                    schedule1.setTime_end(time_end);
+                    schedule1.setDay(day);
+                    scheduleLists.add(schedule1);
+                }
             } while (cursor.moveToNext());
         }
 
