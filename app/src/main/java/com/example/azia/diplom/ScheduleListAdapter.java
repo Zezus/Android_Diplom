@@ -1,12 +1,17 @@
 package com.example.azia.diplom;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.database.sqlite.SQLiteDatabase;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -18,6 +23,8 @@ public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListAdapte
 
     private final Context context;
     private final List<ScheduleList> scheduleLists;
+    public DBScheduleHelper dbSQL;
+    public SQLiteDatabase sqLiteDatabase;
     private ScheduleActivity mainActivity;
     private Dialog dialog;
 
@@ -40,7 +47,8 @@ public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListAdapte
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
+        dbSQL = new DBScheduleHelper(context);
+        sqLiteDatabase = dbSQL.getWritableDatabase();
 
         final ScheduleList scheduleList = scheduleLists.get(position);
         holder.object.setText(scheduleList.getObject());
@@ -48,6 +56,30 @@ public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListAdapte
         holder.time_start.setText(scheduleList.getTime_start());
         holder.time_end.setText(scheduleList.getTime_end());
         holder.days.setText(scheduleList.getDay());
+        holder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder aldial = new AlertDialog.Builder(context);
+                aldial.setMessage("Удалить урок?").setCancelable(false)
+                        .setPositiveButton("Да", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dbSQL.deleteInfo(String.valueOf(scheduleList.getId()), sqLiteDatabase);
+                                Toast.makeText(context, "Предмет удален", Toast.LENGTH_LONG).show();
+                                dbSQL.close();
+                            }
+                        })
+                        .setNegativeButton("Нет", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alert = aldial.create();
+                alert.setTitle("Program");
+                alert.show();
+            }
+        });
 
     }
 
@@ -64,6 +96,7 @@ public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListAdapte
         TextView time_end;
         TextView days;
         RelativeLayout relativeLayout;
+        FloatingActionButton delete;
 
 
         public ViewHolder(View itemView) {
@@ -76,6 +109,7 @@ public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListAdapte
             days = itemView.findViewById(R.id.sc_days);
             room = itemView.findViewById(R.id.sc_room);
             relativeLayout = itemView.findViewById(R.id.sc_rl);
+            delete = itemView.findViewById(R.id.del_sc);
         }
     }
 }

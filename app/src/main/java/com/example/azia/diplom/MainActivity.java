@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements ListFragment.Callback {
 
@@ -60,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements ListFragment.Call
             Intent intent = new Intent();
             intent.setClass(MainActivity.this, ScheduleActivity.class);
             startActivity(intent);
-            Toast.makeText(getApplicationContext(), "hi", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), "hi", Toast.LENGTH_LONG).show();
         }
         transaction.commit();
 

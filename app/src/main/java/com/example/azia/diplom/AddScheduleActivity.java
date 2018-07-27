@@ -1,5 +1,6 @@
 package com.example.azia.diplom;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -51,7 +52,7 @@ public class AddScheduleActivity extends AppCompatActivity {
 
                 // Получаем выбранный объект
                 day = (String) parent.getItemAtPosition(position);
-                Toast.makeText(getApplicationContext(), day, Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), day, Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -72,8 +73,14 @@ public class AddScheduleActivity extends AppCompatActivity {
             dbSQL = new DBScheduleHelper(getApplicationContext());
             sqLiteDatabase = dbSQL.getWritableDatabase();
             dbSQL.addInfo(object_v, room_v, timeStart_v, timeEnd_v, dayy, sqLiteDatabase);
-            Toast.makeText(getApplicationContext(), "DATABASE INSERTED" + dayy, Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Предмет добавлен", Toast.LENGTH_LONG).show();
             dbSQL.close();
+
+
+            Intent intent = new Intent();
+            intent.setClass(AddScheduleActivity.this, ScheduleActivity.class);
+            startActivity(intent);
+
         });
 
     }

@@ -3,7 +3,6 @@ package com.example.azia.diplom;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -62,8 +61,8 @@ public class ScheduleActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                //        .setAction("Action", null).show();
                 //ItemFragment testFragment = new ItemFragment();
                 //transaction.replace(R.id.container, testFragment);
                 //transaction.commit();
@@ -72,6 +71,7 @@ public class ScheduleActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
 
     }
 
@@ -120,35 +120,35 @@ public class ScheduleActivity extends AppCompatActivity {
 
             switch (position) {
                 case 0:
-                    Monday1Fragment bf1 = new Monday1Fragment();
+                    Monday1Fragment day1 = new Monday1Fragment();
                     b = new Bundle();
                     b.putString("tabID", "1");
-                    return bf1;
+                    return day1;
                 case 1:
-                    Monday1Fragment bf2 = new Monday1Fragment();
+                    Tuesday2Fragment day2 = new Tuesday2Fragment();
                     b = new Bundle();
                     b.putString("tabID", "2");
-                    return bf2;
+                    return day2;
                 case 2:
-                    Monday1Fragment bf3 = new Monday1Fragment();
+                    Wednesday3Fragment day3 = new Wednesday3Fragment();
                     b = new Bundle();
                     b.putString("tabID", "3");
-                    return bf3;
+                    return day3;
                 case 3:
-                    Monday1Fragment bf4 = new Monday1Fragment();
+                    Thursday4Fragment day4 = new Thursday4Fragment();
                     b = new Bundle();
                     b.putString("tabID", "4");
-                    return bf4;
+                    return day4;
                 case 4:
-                    Monday1Fragment bf5 = new Monday1Fragment();
+                    Friday5Fragment day5 = new Friday5Fragment();
                     b = new Bundle();
                     b.putString("tabID", "5");
-                    return bf5;
+                    return day5;
                 case 5:
-                    Monday1Fragment bf6 = new Monday1Fragment();
+                    Saturday6Fragment day6 = new Saturday6Fragment();
                     b = new Bundle();
                     b.putString("tabID", "6");
-                    return bf6;
+                    return day6;
 
                 default:
                     return null;

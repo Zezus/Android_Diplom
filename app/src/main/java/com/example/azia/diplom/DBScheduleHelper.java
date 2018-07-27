@@ -45,6 +45,11 @@ public class DBScheduleHelper extends SQLiteOpenHelper {
 
     }
 
+    public void deleteInfo(String id, SQLiteDatabase db) {
+        db.delete(LISTS_TABLE, "_id=" + id, null);
+        Log.e("DATABESE ", "DELETED ROW");
+    }
+
     public void addInfo(String object, String room, String time_start, String time_end, String day, SQLiteDatabase db) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(FULL_OBJECT_COLUMN, object);
