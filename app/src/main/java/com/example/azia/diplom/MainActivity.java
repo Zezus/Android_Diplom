@@ -42,16 +42,19 @@ public class MainActivity extends AppCompatActivity implements ListFragment.Call
 
 
         if (item.getTitle() == "iPhone X") {
-            ItemFragment itemFragment = new ItemFragment();
+            /*ItemFragment itemFragment = new ItemFragment();
             Bundle args = new Bundle();
             args.putParcelable("item", item);
             itemFragment.setArguments(args);
             String tag = ItemFragment.class.getSimpleName();
             transaction.replace(R.id.container, itemFragment, tag);
-            transaction.addToBackStack(tag);
+            transaction.addToBackStack(tag)*/
             //  if (actionBar != null) {
             //       actionBar.setDisplayHomeAsUpEnabled(true);
             //  }
+            Intent intent = new Intent();
+            intent.setClass(MainActivity.this, TimerActivity.class);
+            startActivity(intent);
 
         } else {
             //  ScheduleFragment scheduleFragment= new ScheduleFragment();

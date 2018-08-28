@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
@@ -27,6 +28,9 @@ public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListAdapte
     public SQLiteDatabase sqLiteDatabase;
     private ScheduleActivity mainActivity;
     private Dialog dialog;
+    boolean flag = false;
+    Intent intent = new Intent();
+
 
     public ScheduleListAdapter(Context context, List<ScheduleList> scheduleLists, ScheduleActivity mainActivity) {
         this.context = context;
@@ -80,6 +84,7 @@ public class ScheduleListAdapter extends RecyclerView.Adapter<ScheduleListAdapte
                 alert.show();
             }
         });
+
 
     }
 

@@ -26,4 +26,12 @@
         <item name="colorAccent">@android:color/white</item>
     </style>
 
+    <style name="ThemeApp1.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="ThemeApp1.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="ThemeApp3" parent="ThemeApp2">
+        <item name="colorAccent">@color/redDark</item>
+    </style>
+
 </resources>

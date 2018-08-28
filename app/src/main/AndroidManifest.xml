@@ -22,7 +22,11 @@
             android:name=".ScheduleActivity"
             android:label="@string/title_activity_main2"
             android:theme="@style/ThemeApp2" />
-        <activity android:name=".AddScheduleActivity"></activity>
+        <activity android:name=".AddScheduleActivity" />
+        <activity
+            android:name=".TimerActivity"
+            android:label="@string/title_activity_timer"
+            android:theme="@style/ThemeApp3"></activity>
     </application>
 
 </manifest>

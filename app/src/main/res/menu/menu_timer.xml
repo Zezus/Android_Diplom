@@ -1,0 +1,11 @@
+<menu xmlns:android="//schemas.android.com/apk/res/android"
+    xmlns:app="//schemas.android.com/apk/res-auto"
+    xmlns:tools="//schemas.android.com/tools"
+    tools:context="com.resocoder.timertutorial.TimerActivity">
+    <item
+        android:icon="@drawable/ic_settings"
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
+        app:showAsAction="ifRoom" />
+</menu>
