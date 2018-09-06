@@ -1,4 +1,4 @@
-package com.example.azia.diplom;
+package com.example.azia.diplom.timer;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -9,6 +9,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.example.azia.diplom.R;
 
 import java.util.Locale;
 

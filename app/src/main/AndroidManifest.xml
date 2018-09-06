@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/ThemeApp1">
         <activity
-            android:name=".MainActivity"
+            android:name=".mainMenu.MainActivity"
             android:theme="@style/ThemeApp1">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,14 +19,22 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ScheduleActivity"
+            android:name=".schedule.ScheduleActivity"
             android:label="@string/title_activity_main2"
             android:theme="@style/ThemeApp2" />
-        <activity android:name=".AddScheduleActivity" />
         <activity
-            android:name=".TimerActivity"
+            android:name=".timer.TimerActivity"
             android:label="@string/title_activity_timer"
-            android:theme="@style/ThemeApp3"></activity>
+            android:theme="@style/ThemeApp3" />
+        <activity
+            android:name=".schedule.AddScheduleActivity"
+            android:label="@string/title_activity_add_schedule"
+            android:theme="@style/ThemeApp3" />
+        <activity
+            android:name=".object.ObjectActivity"
+            android:label="@string/title_activity_object"
+            android:theme="@style/ThemeApp3" />
+        <activity android:name=".object.AddObjectActivity" />
     </application>
 
 </manifest>

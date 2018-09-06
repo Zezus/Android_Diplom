@@ -1,4 +1,4 @@
-package com.example.azia.diplom;
+package com.example.azia.diplom.mainMenu;
 
 
 import android.os.Bundle;
@@ -8,6 +8,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.azia.diplom.R;
+import com.example.azia.diplom.helpers.Item;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -50,13 +53,18 @@ public class ListFragment extends Fragment {
 
         Item item2 = new Item();
         item2.setId(UUID.randomUUID());
-        item2.setTitle("iPhone X");
-        item2.setPhoto(R.drawable.iphone);
+        item2.setTitle("Таймер для выполнения \n\tдомашнего задания");
+        item2.setPhoto(R.drawable.timer);
 
+        Item item3 = new Item();
+        item3.setId(UUID.randomUUID());
+        item3.setTitle("Предметы и \n\tпреподаватели");
+        item3.setPhoto(R.drawable.lio);
 
         items = new ArrayList<>();
         items.add(item1);
         items.add(item2);
+        items.add(item3);
     }
 
 

@@ -13,4 +13,7 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="tab_text_6">СБ</string>
     <string name="title_activity_timer">TimerActivity</string>
+    <string name="title_activity_add_schedule">AddScheduleActivity</string>
+    <string name="title_activity_object">ObjectActivity</string>
+    <string name="title_activity_object2">Object2Activity</string>
 </resources>

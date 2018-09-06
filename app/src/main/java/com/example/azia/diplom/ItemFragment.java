@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.azia.diplom.helpers.Item;
+
 
 /**
  * A simple {@link Fragment} subclass.

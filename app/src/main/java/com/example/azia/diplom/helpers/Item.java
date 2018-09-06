@@ -1,4 +1,4 @@
-package com.example.azia.diplom;
+package com.example.azia.diplom.helpers;
 
 import android.os.Parcel;
 import android.os.Parcelable;

@@ -1,4 +1,4 @@
-package com.example.azia.diplom;
+package com.example.azia.diplom.mainMenu;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -9,6 +9,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
+
+import com.example.azia.diplom.R;
+import com.example.azia.diplom.helpers.Item;
+import com.example.azia.diplom.object.ObjectActivity;
+import com.example.azia.diplom.schedule.ScheduleActivity;
+import com.example.azia.diplom.timer.TimerActivity;
 
 public class MainActivity extends AppCompatActivity implements ListFragment.Callback {
 
@@ -40,29 +46,18 @@ public class MainActivity extends AppCompatActivity implements ListFragment.Call
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
 
-
-        if (item.getTitle() == "iPhone X") {
-            /*ItemFragment itemFragment = new ItemFragment();
-            Bundle args = new Bundle();
-            args.putParcelable("item", item);
-            itemFragment.setArguments(args);
-            String tag = ItemFragment.class.getSimpleName();
-            transaction.replace(R.id.container, itemFragment, tag);
-            transaction.addToBackStack(tag)*/
-            //  if (actionBar != null) {
-            //       actionBar.setDisplayHomeAsUpEnabled(true);
-            //  }
-            Intent intent = new Intent();
-            intent.setClass(MainActivity.this, TimerActivity.class);
-            startActivity(intent);
-
-        } else {
-            //  ScheduleFragment scheduleFragment= new ScheduleFragment();
-            // transaction.replace(R.id.container, scheduleFragment);
+        if (item.getTitle() == "Расписание") {
             Intent intent = new Intent();
             intent.setClass(MainActivity.this, ScheduleActivity.class);
             startActivity(intent);
-            //Toast.makeText(getApplicationContext(), "hi", Toast.LENGTH_LONG).show();
+        } else if (item.getTitle() == "Таймер для выполнения \n\tдомашнего задания") {
+            Intent intent = new Intent();
+            intent.setClass(MainActivity.this, TimerActivity.class);
+            startActivity(intent);
+        } else if (item.getTitle() == "Предметы и \n\tпреподаватели") {
+            Intent intent = new Intent();
+            intent.setClass(MainActivity.this, ObjectActivity.class);
+            startActivity(intent);
         }
         transaction.commit();
 

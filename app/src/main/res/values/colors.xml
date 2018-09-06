@@ -2,10 +2,14 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#be0a31</color>
     <color name="accent_material_light_1">#d640ffff</color>
     <color name="accent_material_light_2">#d540ffff</color>
     <color name="white">#990000</color>
     <color name="redDark">#040404</color>
-    <color name="black">#040404</color>
+    <color name="black">#0a0e33</color>
+    <color name="blackRock">#0a0e33</color>
+    <color name="bluePantone">#0023ab</color>
+    <color name="blueWinter">#c9edfd</color>
+    <color name="foreground_material_light">#dc5454</color>
 </resources>
