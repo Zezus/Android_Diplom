@@ -35,6 +35,11 @@
             android:label="@string/title_activity_object"
             android:theme="@style/ThemeApp3" />
         <activity android:name=".object.AddObjectActivity" />
+        <activity
+            android:name=".homeWork.HomeWorkActivity"
+            android:label="@string/title_activity_home_work"
+            android:theme="@style/ThemeApp3" />
+        <activity android:name=".homeWork.AddHomeWorkActivity"></activity>
     </application>
 
 </manifest>

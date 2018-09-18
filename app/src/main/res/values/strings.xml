@@ -16,4 +16,5 @@
     <string name="title_activity_add_schedule">AddScheduleActivity</string>
     <string name="title_activity_object">ObjectActivity</string>
     <string name="title_activity_object2">Object2Activity</string>
+    <string name="title_activity_home_work">HomeWorkActivity</string>
 </resources>

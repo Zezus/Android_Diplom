@@ -61,10 +61,16 @@ public class ListFragment extends Fragment {
         item3.setTitle("Предметы и \n\tпреподаватели");
         item3.setPhoto(R.drawable.lio);
 
+        Item item4 = new Item();
+        item4.setId(UUID.randomUUID());
+        item4.setTitle("Домашнее задание");
+        item4.setPhoto(R.drawable.lio);
+
         items = new ArrayList<>();
         items.add(item1);
         items.add(item2);
         items.add(item3);
+        items.add(item4);
     }
 
 
