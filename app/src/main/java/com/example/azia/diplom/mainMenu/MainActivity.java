@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import com.example.azia.diplom.R;
 import com.example.azia.diplom.helpers.Item;
 import com.example.azia.diplom.homeWork.HomeWorkActivity;
+import com.example.azia.diplom.notes.NoteActivity;
 import com.example.azia.diplom.object.ObjectActivity;
 import com.example.azia.diplom.schedule.ScheduleActivity;
 import com.example.azia.diplom.timer.TimerActivity;
@@ -62,6 +63,10 @@ public class MainActivity extends AppCompatActivity implements ListFragment.Call
         } else if (item.getTitle() == "Домашнее задание") {
             Intent intent = new Intent();
             intent.setClass(MainActivity.this, HomeWorkActivity.class);
+            startActivity(intent);
+        } else if (item.getTitle() == "Записи") {
+            Intent intent = new Intent();
+            intent.setClass(MainActivity.this, NoteActivity.class);
             startActivity(intent);
         }
         transaction.commit();
