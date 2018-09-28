@@ -70,10 +70,10 @@ public class HomeWorkAdapter extends RecyclerView.Adapter<HomeWorkAdapter.ViewHo
         public ViewHolder(View itemView) {
             super(itemView);
 
-            objectTV = itemView.findViewById(R.id.hw_object);
-            taskTV = itemView.findViewById(R.id.hw_task);
-            dateTV = itemView.findViewById(R.id.hw_date);
-            teacherTV = itemView.findViewById(R.id.hw_teacher);
+            objectTV = itemView.findViewById(R.id.hw_tv_object);
+            taskTV = itemView.findViewById(R.id.hw_tv_task);
+            dateTV = itemView.findViewById(R.id.hw_tv_date);
+            teacherTV = itemView.findViewById(R.id.hw_tv_teacher);
 
         }
     }

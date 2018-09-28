@@ -4,19 +4,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/note_note_tv"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/ob_rl"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/del_ob"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="10dp"
+            android:src="@drawable/ic_delete"
+            app:backgroundTint="@android:color/white"
+            app:fabSize="mini" />
+
+        <LinearLayout
+            android:id="@+id/ob__ll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toEndOf="@id/del_ob"
+            android:layout_toRightOf="@id/del_ob"
+            android:orientation="vertical">
+
+
+            <MultiAutoCompleteTextView
+                android:id="@+id/note_note_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rus2"
+                android:text="MultiAutoCompleteTextView"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+    </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

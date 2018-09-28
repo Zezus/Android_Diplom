@@ -19,6 +19,7 @@ public class DBScheduleHelper extends SQLiteOpenHelper {
     public static final String FULL_ROOM_COLUMN = "room";
     public static final String FULL_TIMESTART_COLUMN = "time_start";
     public static final String FULL_TIMEEND_COLUMN = "time_end";
+    public static final String FULL_TIMESORT_COLUMN = "time_sort";
     public static final String FULL_DAY_COLUMN = "day";
     public static final String FULL_TEACHER_COLUMN = "teacher";
 
@@ -28,6 +29,7 @@ public class DBScheduleHelper extends SQLiteOpenHelper {
             FULL_ROOM_COLUMN + " TEXT NOT NULL, " +
             FULL_TIMESTART_COLUMN + " TEXT NOT NULL, " +
             FULL_TIMEEND_COLUMN + " TEXT NOT NULL, " +
+            FULL_TIMESORT_COLUMN + " TEXT NOT NULL, " +
             FULL_DAY_COLUMN + " TEXT NOT NULL, " +
             FULL_TEACHER_COLUMN + " TEXT NOT NULL);";
 
@@ -52,12 +54,13 @@ public class DBScheduleHelper extends SQLiteOpenHelper {
         Log.e("DATABESE ", "DELETED ROW");
     }
 
-    public void addInfo(String object, String room, String time_start, String time_end, String day, String teacher, SQLiteDatabase db) {
+    public void addInfo(String object, String room, String time_start, String time_end, String time_sort, String day, String teacher, SQLiteDatabase db) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(FULL_OBJECT_COLUMN, object);
         contentValues.put(FULL_ROOM_COLUMN, room);
         contentValues.put(FULL_TIMESTART_COLUMN, time_start);
         contentValues.put(FULL_TIMEEND_COLUMN, time_end);
+        contentValues.put(FULL_TIMESORT_COLUMN, time_sort);
         contentValues.put(FULL_DAY_COLUMN, day);
         contentValues.put(FULL_TEACHER_COLUMN, teacher);
         db.insert(LISTS_TABLE, null, contentValues);
@@ -66,7 +69,7 @@ public class DBScheduleHelper extends SQLiteOpenHelper {
 
     public Cursor getInfo(SQLiteDatabase db) {
         Cursor cursor;
-        String[] arr_Strings = {FULL_OBJECT_COLUMN, FULL_ROOM_COLUMN, FULL_TIMESTART_COLUMN, FULL_TIMEEND_COLUMN, FULL_DAY_COLUMN, FULL_TEACHER_COLUMN, ID_COLUMN};
+        String[] arr_Strings = {FULL_OBJECT_COLUMN, FULL_ROOM_COLUMN, FULL_TIMESTART_COLUMN, FULL_TIMEEND_COLUMN, FULL_TIMESORT_COLUMN, FULL_DAY_COLUMN, FULL_TEACHER_COLUMN, ID_COLUMN};
         cursor = db.query(LISTS_TABLE, arr_Strings, null, null, null, null, null);
         return cursor;
 

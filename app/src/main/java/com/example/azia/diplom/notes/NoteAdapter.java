@@ -7,7 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.MultiAutoCompleteTextView;
 
 import com.example.azia.diplom.R;
 import com.example.azia.diplom.dataBase.DBNotesHelper;
@@ -59,14 +59,14 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView noteTV;
+        MultiAutoCompleteTextView noteTV;
         FloatingActionButton delete;
 
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            noteTV = itemView.findViewById(R.id.note_note_tv);
+            noteTV = itemView.findViewById(R.id.note_note_et);
         }
     }
 }

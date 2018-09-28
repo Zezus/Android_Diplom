@@ -52,6 +52,8 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:gravity="center"
+                android:fontFamily="@font/rus2"
+                android:textStyle="bold"
                 android:paddingLeft="10dp"
                 android:singleLine="false"
                 android:text="Batman Vs Superman"

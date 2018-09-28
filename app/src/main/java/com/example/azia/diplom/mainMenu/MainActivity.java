@@ -18,6 +18,8 @@ import com.example.azia.diplom.object.ObjectActivity;
 import com.example.azia.diplom.schedule.ScheduleActivity;
 import com.example.azia.diplom.timer.TimerActivity;
 
+import me.anwarshahriar.calligrapher.Calligrapher;
+
 public class MainActivity extends AppCompatActivity implements ListFragment.Callback {
 
     private RelativeLayout itemLayout;
@@ -30,6 +32,9 @@ public class MainActivity extends AppCompatActivity implements ListFragment.Call
         setContentView(R.layout.activity_main);
         // actionBar = getSupportActionBar();
         // actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back);
+
+        Calligrapher calligrapher = new Calligrapher(this);
+        calligrapher.setFont(this, "rus.ttf", true);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager

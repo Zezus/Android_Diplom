@@ -15,6 +15,8 @@ import com.example.azia.diplom.helpers.Item;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import me.anwarshahriar.calligrapher.Calligrapher;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -36,6 +38,9 @@ public class ListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_list, container, false);
         itemRecyclerView = view.findViewById(R.id.fl_items_rv);
         itemRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        Calligrapher calligrapher = new Calligrapher(getActivity());
+        calligrapher.setFont(getActivity(), "rus.ttf", true);
 
         init();
 
@@ -59,17 +64,17 @@ public class ListFragment extends Fragment {
         Item item3 = new Item();
         item3.setId(UUID.randomUUID());
         item3.setTitle("Предметы и \n\tпреподаватели");
-        item3.setPhoto(R.drawable.lio);
+        item3.setPhoto(R.drawable.objects);
 
         Item item4 = new Item();
         item4.setId(UUID.randomUUID());
         item4.setTitle("Домашнее задание");
-        item4.setPhoto(R.drawable.lio);
+        item4.setPhoto(R.drawable.homework);
 
         Item item5 = new Item();
         item5.setId(UUID.randomUUID());
         item5.setTitle("Записи");
-        item5.setPhoto(R.drawable.lio);
+        item5.setPhoto(R.drawable.notes);
 
         items = new ArrayList<>();
         items.add(item1);

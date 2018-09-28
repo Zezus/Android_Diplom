@@ -2,18 +2,25 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="10dp"
-    android:paddingTop="10dp">
+    android:layout_height="wrap_content"
+    android:paddingTop="8dp">
+
 
     <RelativeLayout
         android:id="@+id/sc_rl"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:layout_height="match_parent"
         android:orientation="horizontal"
+        android:layout_marginLeft="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginRight="5dp"
+        android:background="@color/white"
+        android:elevation="10dp"
+        android:outlineProvider="bounds"
+        android:padding="10dp"
+        android:paddingBottom="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
 
@@ -22,10 +29,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
-            android:layout_margin="3dp"
+            android:layout_marginRight="10dp"
             android:src="@drawable/ic_delete"
             app:backgroundTint="@android:color/white"
             app:fabSize="mini" />
+
 
         <LinearLayout
             android:id="@+id/il_titletext_ll"
@@ -38,45 +46,68 @@
             <TextView
                 android:id="@+id/sc_object"
                 android:layout_width="match_parent"
-                android:layout_height="41dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:fontFamily="@font/rus2"
                 android:text="object"
-                android:textSize="23dp" />
+                android:textColor="@color/color_schedule"
+                android:textSize="23dp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/sc_room"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rus2"
                 android:padding="5dp"
-                android:text="room" />
+                android:text="room"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/sc_time_start"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rus2"
                 android:padding="5dp"
-                android:text="time_start" />
+                android:text="time_start"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/sc_time_end"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rus2"
                 android:padding="5dp"
-                android:text="time_end" />
-
-            <TextView
-                android:id="@+id/sc_days"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:padding="5dp"
-                android:text="days" />
+                android:text="time_end"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/sc_teacher"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rus2"
                 android:padding="5dp"
-                android:text="teacher" />
+                android:text="teacher"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/sc_days"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rus2"
+                android:padding="5dp"
+                android:text="days"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
