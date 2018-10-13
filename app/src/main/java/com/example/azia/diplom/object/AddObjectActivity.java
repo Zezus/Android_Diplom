@@ -11,6 +11,8 @@ import android.widget.Toast;
 import com.example.azia.diplom.R;
 import com.example.azia.diplom.dataBase.DBObjectHelper;
 
+import cn.refactor.lib.colordialog.PromptDialog;
+
 public class AddObjectActivity extends AppCompatActivity {
 
     public EditText object;
@@ -33,16 +35,32 @@ public class AddObjectActivity extends AppCompatActivity {
             String object_v = object.getText().toString();
             String teacher_v = teacher.getText().toString();
 
-            dbSQL = new DBObjectHelper(getApplicationContext());
-            sqLiteDatabase = dbSQL.getWritableDatabase();
-            dbSQL.addInfo(object_v, teacher_v, sqLiteDatabase);
-            Toast.makeText(getApplicationContext(), "Предмет и преподаватель добавлены", Toast.LENGTH_LONG).show();
-            dbSQL.close();
+            if (object_v.length() == 0 || teacher_v.length() == 0) {
+                new PromptDialog(this)
+                        .setDialogType(PromptDialog.DIALOG_TYPE_WARNING)
+                        .setAnimationEnable(true)
+                        .setTitleText("")
+                        .setContentText("Заполните все поля")
+                        .setPositiveListener("OK", new PromptDialog.OnPositiveListener() {
+                            @Override
+                            public void onClick(PromptDialog dialog) {
+                                dialog.dismiss();
+                            }
+                        }).show();
+
+            } else {
+
+                dbSQL = new DBObjectHelper(getApplicationContext());
+                sqLiteDatabase = dbSQL.getWritableDatabase();
+                dbSQL.addInfo(object_v, teacher_v, sqLiteDatabase);
+                Toast.makeText(getApplicationContext(), "Предмет и преподаватель добавлены", Toast.LENGTH_LONG).show();
+                dbSQL.close();
 
 
-            Intent intent = new Intent();
-            intent.setClass(AddObjectActivity.this, ObjectActivity.class);
-            startActivity(intent);
+                Intent intent = new Intent();
+                intent.setClass(AddObjectActivity.this, ObjectActivity.class);
+                startActivity(intent);
+            }
 
         });
     }

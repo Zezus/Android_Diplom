@@ -5,7 +5,15 @@
     android:id="@+id/teeest"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/backtest"
     tools:context="com.example.azia.diplom.schedule.AddScheduleActivity">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha=".2"
+        android:background="#000000" />
+
 
     <Spinner
         android:id="@+id/object"

@@ -1,21 +1,21 @@
 package com.example.azia.diplom.object;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.azia.diplom.R;
 import com.example.azia.diplom.dataBase.DBObjectHelper;
+import com.sdsmdg.tastytoast.TastyToast;
 
 import java.util.List;
+
+import cn.refactor.lib.colordialog.ColorDialog;
 
 
 public class ObjectAdapter extends RecyclerView.Adapter<ObjectAdapter.ViewHolder> {
@@ -58,25 +58,47 @@ public class ObjectAdapter extends RecyclerView.Adapter<ObjectAdapter.ViewHolder
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder aldial = new AlertDialog.Builder(context);
-                aldial.setMessage("Удалить предмет?").setCancelable(false)
-                        .setPositiveButton("Да", new DialogInterface.OnClickListener() {
+                ColorDialog dialog = new ColorDialog(context);
+                dialog.setTitle("Удаление");
+                dialog.setContentText("Вы уверенеы, что хотите удалить предмет?");
+                //dialog.setContentImage(getResources().getDrawable(R.mipmap.sample_img));
+                dialog.setPositiveListener("ДА", new ColorDialog.OnPositiveListener() {
+                    @Override
+                    public void onClick(ColorDialog dialog) {
+                        dbSQL.deleteInfo(String.valueOf(objectList.getId()), sqLiteDatabase);
+                        TastyToast.makeText(context, "Предмет удален  !", TastyToast.LENGTH_LONG,
+                                TastyToast.INFO);
+                        dbSQL.close();
+                        dialog.cancel();
+                    }
+                })
+                        .setNegativeListener("НЕТ", new ColorDialog.OnNegativeListener() {
                             @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dbSQL.deleteInfo(String.valueOf(objectList.getId()), sqLiteDatabase);
-                                Toast.makeText(context, "Предмет удален", Toast.LENGTH_LONG).show();
-                                dbSQL.close();
-                            }
-                        })
-                        .setNegativeButton("Нет", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
+                            public void onClick(ColorDialog dialog) {
                                 dialog.cancel();
                             }
-                        });
-                AlertDialog alert = aldial.create();
-                alert.setTitle("Program");
-                alert.show();
+                        }).show();
+
+
+//                AlertDialog.Builder aldial = new AlertDialog.Builder(context);
+//                aldial.setMessage("Удалить предмет?").setCancelable(false)
+//                        .setPositiveButton("Да", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//                                dbSQL.deleteInfo(String.valueOf(objectList.getId()), sqLiteDatabase);
+//                                Toast.makeText(context, "Предмет удален", Toast.LENGTH_LONG).show();
+//                                dbSQL.close();
+//                            }
+//                        })
+//                        .setNegativeButton("Нет", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//                                dialog.cancel();
+//                            }
+//                        });
+//                AlertDialog alert = aldial.create();
+//                alert.setTitle("Program");
+//                alert.show();
             }
         });
     }

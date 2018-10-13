@@ -4,7 +4,7 @@ android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.example.azia.diplom"
-        minSdkVersion 15
+        minSdkVersion 17
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -41,6 +41,6 @@ dependencies {
     compile 'me.anwarshahriar:calligrapher:1.0'
     compile 'com.sdsmdg.tastytoast:tastytoast:0.1.1'
     compile 'com.github.andyxialm:ColorDialog:1.0.0'
-
+    compile 'com.github.jgabrielfreitas:BlurImageView:1.0.1'
 
 }

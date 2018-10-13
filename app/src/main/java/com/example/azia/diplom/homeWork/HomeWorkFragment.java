@@ -3,10 +3,13 @@ package com.example.azia.diplom.homeWork;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,17 +52,20 @@ public class HomeWorkFragment extends Fragment {
         if (cursor.moveToFirst()) {
             do {
 
-                String object, task, date, teacher, id;
+                String object, task, date, teacher, image, id;
+                //String object, task, date, teacher, id;
                 object = cursor.getString(0);
                 task = cursor.getString(1);
                 date = cursor.getString(2);
                 teacher = cursor.getString(3);
-                id = cursor.getString(4);
+                image = cursor.getString(4);
+                id = cursor.getString(5);
                 HomeWorkList homeWork1 = new HomeWorkList();
                 homeWork1.setObject(object);
                 homeWork1.setTask(task);
                 homeWork1.setDate(date);
                 homeWork1.setTeacher(teacher);
+                homeWork1.setImage(StringToBitMap(image));
                 homeWork1.setId(Integer.parseInt(id));
                 homeWorkLists.add(homeWork1);
             } while (cursor.moveToNext());
@@ -68,6 +74,17 @@ public class HomeWorkFragment extends Fragment {
         itemRecyclerView.setAdapter(new HomeWorkAdapter(getContext(), homeWorkLists, (HomeWorkActivity) getActivity()));
 
         return view;
+    }
+
+    public Bitmap StringToBitMap(String encodedString) {
+        try {
+            byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        } catch (Exception e) {
+            e.getMessage();
+            return null;
+        }
     }
 
 }

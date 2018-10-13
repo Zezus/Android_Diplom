@@ -14,13 +14,15 @@ public class DBHomeWorkHelper extends SQLiteOpenHelper {
     public static final String FULL_TASK_COLUMN = "task";
     public static final String FULL_DATE_COLUMN = "date";
     public static final String FULL_TEACHER_COLUMN = "teacher";
+    public static final String FULL_IMAGE_COLUMN = "image";
 
     public static final String CREATE_DATABASE_COMMAND = "CREATE TABLE " + LISTS_TABLE +
             " (" + ID_COLUMN + " INTEGER PRIMARY KEY, " +
             FULL_OBJECT_COLUMN + " TEXT NOT NULL, " +
             FULL_TASK_COLUMN + " TEXT NOT NULL, " +
             FULL_DATE_COLUMN + " TEXT NOT NULL, " +
-            FULL_TEACHER_COLUMN + " TEXT NOT NULL);";
+            FULL_TEACHER_COLUMN + " TEXT NOT NULL, " +
+            FULL_IMAGE_COLUMN + " TEXT NOT NULL);";
 
     public static final int DATABASE_VERSION = 1;
 
@@ -43,19 +45,20 @@ public class DBHomeWorkHelper extends SQLiteOpenHelper {
         Log.e("DATABESE ", "DELETED ROW");
     }
 
-    public void addInfo(String object, String task, String date, String teacher, SQLiteDatabase db) {
+    public void addInfo(String object, String task, String date, String teacher, String image, SQLiteDatabase db) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(FULL_OBJECT_COLUMN, object);
         contentValues.put(FULL_TASK_COLUMN, task);
         contentValues.put(FULL_DATE_COLUMN, date);
         contentValues.put(FULL_TEACHER_COLUMN, teacher);
+        contentValues.put(FULL_IMAGE_COLUMN, image);
         db.insert(LISTS_TABLE, null, contentValues);
         Log.e("DATABESE ", "INSERTED");
     }
 
     public Cursor getInfo(SQLiteDatabase db) {
         Cursor cursor;
-        String[] arr_Strings = {FULL_OBJECT_COLUMN, FULL_TASK_COLUMN, FULL_DATE_COLUMN, FULL_TEACHER_COLUMN, ID_COLUMN};
+        String[] arr_Strings = {FULL_OBJECT_COLUMN, FULL_TASK_COLUMN, FULL_DATE_COLUMN, FULL_TEACHER_COLUMN, FULL_IMAGE_COLUMN, ID_COLUMN};
         cursor = db.query(LISTS_TABLE, arr_Strings, null, null, null, null, null);
         return cursor;
 

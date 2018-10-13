@@ -14,4 +14,5 @@
     <color name="foreground_material_light">#dc5454</color>
     <color name="color_schedule">#07bcf9</color>
     <color name="color_schedulemain">#e2e2e4</color>
+    <color name="alphafull">#00000000</color>
 </resources>

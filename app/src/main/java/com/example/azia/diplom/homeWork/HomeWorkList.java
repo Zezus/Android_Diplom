@@ -1,5 +1,6 @@
 package com.example.azia.diplom.homeWork;
 
+import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -22,18 +23,21 @@ public class HomeWorkList implements Parcelable {
     private String task;
     private String date;
     private String teacher;
+    private Bitmap image;
 
     public HomeWorkList() {
     }
 
+
     public HomeWorkList(Parcel in) {
-        String[] data = new String[5];
+        String[] data = new String[6];
         in.readStringArray(data);
         data[0] = String.valueOf(id);
         data[1] = String.valueOf(object);
         data[2] = String.valueOf(task);
         data[3] = String.valueOf(date);
         data[4] = String.valueOf(teacher);
+        data[5] = String.valueOf(image);
     }
 
     public int getId() {
@@ -74,6 +78,14 @@ public class HomeWorkList implements Parcelable {
 
     public void setTeacher(String teacher) {
         this.teacher = teacher;
+    }
+
+    public Bitmap getImage() {
+        return image;
+    }
+
+    public void setImage(Bitmap image) {
+        this.image = image;
     }
 
 

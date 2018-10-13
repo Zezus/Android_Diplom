@@ -2,17 +2,25 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:paddingTop="8dp">
 
 
     <RelativeLayout
         android:id="@+id/ob_rl"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:layout_height="match_parent"
         android:orientation="horizontal"
+        android:layout_marginLeft="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginRight="5dp"
+        android:background="@color/white"
+        android:elevation="10dp"
+        android:outlineProvider="bounds"
+        android:padding="10dp"
+        android:paddingBottom="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
 
@@ -37,42 +45,24 @@
             <TextView
                 android:id="@+id/ob_tv_object"
                 android:layout_width="match_parent"
-                android:layout_height="33dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="object"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/rus2"
-                android:textStyle="bold"
-                app:layout_constraintVertical_bias="0.015" />
+                android:padding="5dp"
+                android:text="object"
+                android:textColor="@color/color_schedule"
+                android:textSize="23dp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/ob_tv_teacher"
                 android:layout_width="match_parent"
-                android:layout_height="33dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="teacher"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ob_tv_object"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/rus2"
-                android:textStyle="bold"
-                app:layout_constraintVertical_bias="0.015" />
+                android:padding="5dp"
+                android:text="teacher"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                android:textStyle="bold" />
 
         </LinearLayout>
     </RelativeLayout>
