@@ -3,9 +3,14 @@ package com.example.azia.diplom.mainMenu;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -20,7 +25,7 @@ import com.example.azia.diplom.timer.TimerActivity;
 
 import me.anwarshahriar.calligrapher.Calligrapher;
 
-public class MainActivity extends AppCompatActivity implements ListFragment.Callback {
+public class MainActivity extends AppCompatActivity implements ListFragment.Callback, NavigationView.OnNavigationItemSelectedListener {
 
     private RelativeLayout itemLayout;
     // private ActionBar actionBar;
@@ -33,20 +38,93 @@ public class MainActivity extends AppCompatActivity implements ListFragment.Call
         // actionBar = getSupportActionBar();
         // actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back);
 
+        Toolbar toolbar = findViewById(R.id.am_toolbar);
+        setSupportActionBar(toolbar);
+
         Calligrapher calligrapher = new Calligrapher(this);
         calligrapher.setFont(this, "rus.ttf", true);
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
+        /*FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager
                 .beginTransaction();
 
         // добавляем фрагмент
         ListFragment myFragment = new ListFragment();
         fragmentTransaction.add(R.id.container, myFragment);
-        fragmentTransaction.commit();
+        fragmentTransaction.commit();*/
 
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
+                R.string.open, R.string.close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.bringToFront();
+
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.fl_main, new HomeFragment());
+        ft.commit();
     }
 
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        Class fragmentClass = null;
+        Intent i = null;
+
+        switch (item.getItemId()) {
+            case R.id.item_schedule:
+                i = new Intent(MainActivity.this, ScheduleActivity.class);
+                startActivity(i);
+                break;
+
+            case R.id.item_timer:
+                i = new Intent(MainActivity.this, TimerActivity.class);
+                startActivity(i);
+                break;
+
+            case R.id.item_object:
+                i = new Intent(MainActivity.this, ObjectActivity.class);
+                startActivity(i);
+                break;
+
+            case R.id.item_homework:
+                i = new Intent(MainActivity.this, HomeWorkActivity.class);
+                startActivity(i);
+                break;
+
+            case R.id.item_note:
+                i = new Intent(MainActivity.this, NoteActivity.class);
+                startActivity(i);
+                break;
+
+            case R.id.item_exit:
+                finish();
+                System.exit(0);
+                break;
+
+            default:
+                fragmentClass = HomeFragment.class;
+        }
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+
+        return true;
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
 
     @Override
     public void changeFragmentClicked(View view, Item item) {

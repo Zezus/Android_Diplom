@@ -25,30 +25,51 @@
         <activity
             android:name=".schedule.ScheduleActivity"
             android:label="@string/title_activity_main2"
-            android:theme="@style/ThemeApp2" />
+            android:theme="@style/ThemeApp2">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".mainMenu.MainActivity" />
+        </activity>
         <activity
             android:name=".timer.TimerActivity"
             android:label="@string/title_activity_timer"
-            android:theme="@style/ThemeApp3" />
+            android:theme="@style/ThemeApp3">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".mainMenu.MainActivity" />
+        </activity>
+        <activity
+            android:name=".object.ObjectActivity"
+            android:label="@string/title_activity_object"
+            android:theme="@style/ThemeApp3">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".mainMenu.MainActivity" />
+        </activity>
+        <activity
+            android:name=".homeWork.HomeWorkActivity"
+            android:label="@string/title_activity_home_work"
+            android:theme="@style/ThemeApp3">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".mainMenu.MainActivity" />
+        </activity>
+        <activity
+            android:name=".notes.NoteActivity"
+            android:label="@string/title_activity_note"
+            android:theme="@style/ThemeApp1">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".mainMenu.MainActivity" />
+        </activity>
+
+        <activity android:name=".homeWork.AddHomeWorkActivity" />
+        <activity android:name=".notes.AddNoteActivity" />
+        <activity android:name=".object.AddObjectActivity" />
         <activity
             android:name=".schedule.AddScheduleActivity"
             android:label="@string/title_activity_add_schedule"
             android:theme="@style/ThemeApp3" />
-        <activity
-            android:name=".object.ObjectActivity"
-            android:label="@string/title_activity_object"
-            android:theme="@style/ThemeApp3" />
-        <activity android:name=".object.AddObjectActivity" />
-        <activity
-            android:name=".homeWork.HomeWorkActivity"
-            android:label="@string/title_activity_home_work"
-            android:theme="@style/ThemeApp3" />
-        <activity android:name=".homeWork.AddHomeWorkActivity" />
-        <activity
-            android:name=".notes.NoteActivity"
-            android:label="@string/title_activity_note"
-            android:theme="@style/ThemeApp1" />
-        <activity android:name=".notes.AddNoteActivity" />
     </application>
 
 </manifest>
