@@ -16,7 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/ThemeApp1.PopupOverlay" />
+            app:popupTheme="@style/ThemeApp1.PopupOverlay"
+            app:title="Быстрые записи" />
 
     </android.support.design.widget.AppBarLayout>
 

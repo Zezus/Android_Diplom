@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -36,7 +37,10 @@ public class TimerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_timer);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setIcon(R.drawable.ic_timer);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        getSupportActionBar().setIcon(R.drawable.ic_timer_white);
         getSupportActionBar().setTitle("        Timer");
 
         mTextViewCountDown = findViewById(R.id.textView_countdown);
@@ -71,7 +75,7 @@ public class TimerActivity extends AppCompatActivity {
     private void startTimer() {
         spinner.setVisibility(View.VISIBLE);
         mButtonStartPause.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_pause));
-        mButtonReset.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_stopnot));
+        mButtonReset.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_stop_black));
 
         mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
             @Override
@@ -90,7 +94,7 @@ public class TimerActivity extends AppCompatActivity {
                 mButtonStartPause.setEnabled(false);
                 mButtonReset.setEnabled(true);
                 spinner.setVisibility(View.GONE);
-                mButtonReset.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_stop));
+                mButtonReset.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_stop_white));
 
             }
         }.start();
@@ -107,7 +111,7 @@ public class TimerActivity extends AppCompatActivity {
         mTimerRunning = false;
         //    mButtonStartPause.setText("Start");
         mButtonStartPause.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_play));
-        mButtonReset.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_stop));
+        mButtonReset.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_stop_white));
         spinner.setVisibility(View.GONE);
         mButtonReset.setEnabled(true);
     }
@@ -128,6 +132,21 @@ public class TimerActivity extends AppCompatActivity {
         String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
 
         mTextViewCountDown.setText(timeLeftFormatted);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.home) {
+            this.finish();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 }

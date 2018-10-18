@@ -3,7 +3,7 @@
     xmlns:tools="//schemas.android.com/tools"
     tools:context="com.resocoder.timertutorial.TimerActivity">
     <item
-        android:icon="@drawable/ic_settings"
+        android:icon="@drawable/ic_settings_white"
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:title="@string/action_settings"

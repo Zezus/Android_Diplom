@@ -43,4 +43,12 @@
         <item name="android:colorForeground">@color/colorAccent</item>
     </style>
 
+    <style name="BlackTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/blueDark_main</item>
+        <item name="colorPrimaryDark">@color/blueDark_main</item>
+        <item name="android:textColorPrimary">@color/text_blueDark</item>
+        <item name="colorAccent">@color/text_blueDark</item>
+        <item name="android:colorBackground">@color/BlueDark2</item>
+    </style>
+
 </resources>

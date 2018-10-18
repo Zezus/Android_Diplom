@@ -16,7 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:title="Таймер для д/з" />
 
     </android.support.design.widget.AppBarLayout>
 
@@ -29,7 +30,7 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_bigger_margin"
         app:backgroundTint="@android:color/black"
-        app:srcCompat="@drawable/ic_stop" />
+        app:srcCompat="@drawable/ic_stop_white" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_start"

@@ -15,4 +15,7 @@
     <color name="color_schedule">#07bcf9</color>
     <color name="color_schedulemain">#e2e2e4</color>
     <color name="alphafull">#00000000</color>
+    <color name="blueDark_main">#1b2936</color>
+    <color name="text_blueDark">#5f99c9</color>
+    <color name="BlueDark2">#233446</color>
 </resources>

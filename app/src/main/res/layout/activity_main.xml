@@ -15,7 +15,7 @@
         android:layout_weight="1"
         android:background="?attr/colorPrimary"
         app:layout_scrollFlags="scroll|enterAlways"
-        app:popupTheme="@style/AppTheme.PopupOverlay"
+        android:theme="@style/AppTheme.AppBarOverlay"
         app:title="Your Diary" />
 
     <FrameLayout
@@ -36,10 +36,13 @@
             android:id="@+id/nav_view"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_gravity="start"
             android:layout_marginTop="@dimen/appbar_padding_top"
-            app:headerLayout="@layout/header"
-            app:menu="@menu/drawer_menu" />
+            android:layout_gravity="start"
+            android:background="@color/blueDark_main"
+            app:itemIconTint="@color/white"
+            app:itemTextColor="@color/white"
+            app:menu="@menu/drawer_menu"></android.support.design.widget.NavigationView>
+
 
     </android.support.v4.widget.DrawerLayout>
 </RelativeLayout>

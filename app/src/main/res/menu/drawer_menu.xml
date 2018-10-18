@@ -4,27 +4,27 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/item_schedule"
-            android:icon="@drawable/ic_add"
+            android:icon="@drawable/ic_schedule"
             android:title="Расписание" />
         <item
             android:id="@+id/item_timer"
-            android:icon="@drawable/ic_addfile"
+            android:icon="@drawable/ic_timer_white"
             android:title="Таймер" />
         <item
             android:id="@+id/item_object"
-            android:icon="@drawable/ic_delete"
+            android:icon="@drawable/ic_object"
             android:title="Предметы и преподаватели" />
         <item
             android:id="@+id/item_homework"
-            android:icon="@drawable/ic_delete"
+            android:icon="@drawable/ic_homework"
             android:title="Домашнее задание" />
         <item
             android:id="@+id/item_note"
-            android:icon="@drawable/ic_delete"
+            android:icon="@drawable/ic_notes"
             android:title="Быстрые записи" />
         <item
             android:id="@+id/item_exit"
-            android:icon="@drawable/ic_delete"
+            android:icon="@drawable/ic_exit"
             android:title="Выход" />
     </group>
 </menu>
