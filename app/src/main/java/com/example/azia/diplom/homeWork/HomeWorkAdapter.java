@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +17,11 @@ import android.widget.TextView;
 
 import com.example.azia.diplom.R;
 import com.example.azia.diplom.dataBase.DBHomeWorkHelper;
+import com.sdsmdg.tastytoast.TastyToast;
 
 import java.util.List;
+
+import cn.refactor.lib.colordialog.ColorDialog;
 
 public class HomeWorkAdapter extends RecyclerView.Adapter<HomeWorkAdapter.ViewHolder> {
 
@@ -99,6 +103,52 @@ public class HomeWorkAdapter extends RecyclerView.Adapter<HomeWorkAdapter.ViewHo
         holder.dateTV.setText(homeWorkList.getDate());
         holder.teacherTV.setText(homeWorkList.getTeacher());
         holder.imageIV.setImageBitmap(homeWorkList.getImage());
+        holder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ColorDialog dialog = new ColorDialog(context);
+                dialog.setTitle("Удаление");
+                dialog.setContentText("Вы уверены, что хотите удалить это задание?");
+                //dialog.setContentImage(getResources().getDrawable(R.mipmap.sample_img));
+                dialog.setPositiveListener("ДА", new ColorDialog.OnPositiveListener() {
+                    @Override
+                    public void onClick(ColorDialog dialog) {
+                        dbSQL.deleteInfo(String.valueOf(homeWorkList.getId()), sqLiteDatabase);
+                        TastyToast.makeText(context, "Задание удалено !", TastyToast.LENGTH_LONG,
+                                TastyToast.INFO);
+                        dbSQL.close();
+                        dialog.cancel();
+                    }
+                })
+                        .setNegativeListener("НЕТ", new ColorDialog.OnNegativeListener() {
+                            @Override
+                            public void onClick(ColorDialog dialog) {
+                                dialog.cancel();
+                            }
+                        }).show();
+
+
+//                AlertDialog.Builder aldial = new AlertDialog.Builder(context);
+//                aldial.setMessage("Удалить предмет?").setCancelable(false)
+//                        .setPositiveButton("Да", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//                                dbSQL.deleteInfo(String.valueOf(objectList.getId()), sqLiteDatabase);
+//                                Toast.makeText(context, "Предмет удален", Toast.LENGTH_LONG).show();
+//                                dbSQL.close();
+//                            }
+//                        })
+//                        .setNegativeButton("Нет", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//                                dialog.cancel();
+//                            }
+//                        });
+//                AlertDialog alert = aldial.create();
+//                alert.setTitle("Program");
+//                alert.show();
+            }
+        });
     }
 
     public String getPathFromURI(Uri contentUri) {
@@ -136,6 +186,8 @@ public class HomeWorkAdapter extends RecyclerView.Adapter<HomeWorkAdapter.ViewHo
         TextView dateTV;
         TextView teacherTV;
         ImageView imageIV;
+        FloatingActionButton delete;
+
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -145,6 +197,7 @@ public class HomeWorkAdapter extends RecyclerView.Adapter<HomeWorkAdapter.ViewHo
             dateTV = itemView.findViewById(R.id.hw_tv_date);
             teacherTV = itemView.findViewById(R.id.hw_tv_teacher);
             imageIV = itemView.findViewById(R.id.hw_iv_image);
+            delete = itemView.findViewById(R.id.hw_del);
 
         }
     }

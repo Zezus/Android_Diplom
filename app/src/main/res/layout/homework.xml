@@ -2,16 +2,24 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:paddingTop="8dp">
 
     <RelativeLayout
         android:id="@+id/hw_rl"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:layout_height="match_parent"
         android:orientation="horizontal"
+        android:layout_marginLeft="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginRight="5dp"
+        android:background="@color/BlueDark2"
+        android:elevation="10dp"
+        android:outlineProvider="bounds"
+        android:padding="10dp"
+        android:paddingBottom="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
 
@@ -22,7 +30,7 @@
             android:layout_gravity="end|bottom"
             android:layout_margin="10dp"
             android:src="@drawable/ic_deletewhite"
-            app:backgroundTint="@android:color/white"
+            app:backgroundTint="@color/text_blueDark"
             app:fabSize="mini" />
 
         <LinearLayout
@@ -45,6 +53,8 @@
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/rus2"
                 android:text="date"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_text_size"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -54,7 +64,7 @@
                 app:layout_constraintVertical_bias="0.015" />
 
             <TextView
-                android:id="@+id/hw_tv_task"
+                android:id="@+id/hw_tv_object"
                 android:layout_width="match_parent"
                 android:layout_height="33dp"
                 android:layout_marginBottom="8dp"
@@ -64,7 +74,9 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/rus2"
-                android:text="task"
+                android:text="object"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_text_size"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -85,16 +97,18 @@
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/rus2"
                 android:text="teacher"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_text_size"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/hw_tv_task"
+                app:layout_constraintTop_toBottomOf="@id/hw_tv_object"
                 app:layout_constraintVertical_bias="0.015" />
 
             <TextView
-                android:id="@+id/hw_tv_object"
+                android:id="@+id/hw_tv_task"
                 android:layout_width="match_parent"
                 android:layout_height="33dp"
                 android:layout_marginBottom="8dp"
@@ -104,7 +118,9 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/rus2"
-                android:text="object"
+                android:text="task"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_text_size"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -112,6 +128,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/hw_tv_teacher"
                 app:layout_constraintVertical_bias="0.015" />
+
 
             <ImageView
                 android:id="@+id/hw_iv_image"

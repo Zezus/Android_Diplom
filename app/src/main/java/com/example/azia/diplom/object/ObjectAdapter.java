@@ -60,7 +60,7 @@ public class ObjectAdapter extends RecyclerView.Adapter<ObjectAdapter.ViewHolder
             public void onClick(View view) {
                 ColorDialog dialog = new ColorDialog(context);
                 dialog.setTitle("Удаление");
-                dialog.setContentText("Вы уверенеы, что хотите удалить предмет?");
+                dialog.setContentText("Вы уверены, что хотите удалить предмет?");
                 //dialog.setContentImage(getResources().getDrawable(R.mipmap.sample_img));
                 dialog.setPositiveListener("ДА", new ColorDialog.OnPositiveListener() {
                     @Override

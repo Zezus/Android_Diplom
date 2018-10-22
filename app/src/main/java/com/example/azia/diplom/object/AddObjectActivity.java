@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -30,6 +32,11 @@ public class AddObjectActivity extends AppCompatActivity {
         object = findViewById(R.id.ob_et_object);
         teacher = findViewById(R.id.ob_et_teacher);
         btn_send = findViewById(R.id.ob_btn_send);
+
+        Toolbar toolbar = findViewById(R.id.toolbar_add_object);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         btn_send.setOnClickListener(view -> {
             String object_v = object.getText().toString();
@@ -63,5 +70,20 @@ public class AddObjectActivity extends AppCompatActivity {
             }
 
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.home) {
+            this.finish();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -51,7 +51,7 @@
                 android:fontFamily="@font/rus2"
                 android:text="object"
                 android:textColor="@color/white"
-                android:textSize="23dp"
+                android:textSize="@dimen/title_text_size"
                 android:textStyle="bold" />
 
             <TextView
@@ -62,7 +62,7 @@
                 android:padding="5dp"
                 android:text="room"
                 android:textColor="@color/text_blueDark"
-                android:textSize="16dp"
+                android:textSize="@dimen/text_text_size"
                 android:textStyle="bold" />
 
             <TextView
@@ -73,7 +73,7 @@
                 android:padding="5dp"
                 android:text="time_start"
                 android:textColor="@color/text_blueDark"
-                android:textSize="16dp"
+                android:textSize="@dimen/text_text_size"
                 android:textStyle="bold" />
 
             <TextView
@@ -84,7 +84,7 @@
                 android:padding="5dp"
                 android:text="time_end"
                 android:textColor="@color/text_blueDark"
-                android:textSize="16dp"
+                android:textSize="@dimen/text_text_size"
                 android:textStyle="bold" />
 
             <TextView
@@ -95,7 +95,7 @@
                 android:padding="5dp"
                 android:text="teacher"
                 android:textColor="@color/text_blueDark"
-                android:textSize="16dp"
+                android:textSize="@dimen/text_text_size"
                 android:textStyle="bold" />
 
             <TextView
@@ -106,7 +106,7 @@
                 android:padding="5dp"
                 android:text="days"
                 android:textColor="@color/text_blueDark"
-                android:textSize="16dp"
+                android:textSize="@dimen/text_text_size"
                 android:textStyle="bold" />
 
         </LinearLayout>

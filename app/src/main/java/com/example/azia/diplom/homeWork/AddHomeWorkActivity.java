@@ -240,8 +240,7 @@ public class AddHomeWorkActivity extends AppCompatActivity implements DatePicker
         c.set(Calendar.YEAR, year);
         c.set(Calendar.MONTH, month);
         c.set(Calendar.DAY_OF_MONTH, day);
-        date = DateFormat.getDateInstance().format(c.getTime());
-
+        date = String.format("%1$tA", c) + " - " + DateFormat.getDateInstance().format(c.getTime());
         TextView test = findViewById(R.id.hwadd_test);
         test.setText(date);
     }

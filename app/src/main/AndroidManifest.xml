@@ -66,17 +66,23 @@
         <activity
             android:name=".homeWork.AddHomeWorkActivity"
             android:theme="@style/BlackTheme">
-
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".homeWork.HomeWorkActivity" />
         </activity>
         <activity
             android:name=".notes.AddNoteActivity"
             android:theme="@style/BlackTheme">
-
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".notes.NoteActivity" />
         </activity>
         <activity
             android:name=".object.AddObjectActivity"
             android:theme="@style/BlackTheme">
-
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".object.ObjectActivity" />
 
         </activity>
         <activity

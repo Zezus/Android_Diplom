@@ -18,6 +18,22 @@
         app:layout_scrollFlags="scroll|enterAlways"
         app:title="Добавить расписание " />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:alpha="0.6"
+        android:background="@color/text_blueDark"
+        app:layout_constraintBottom_toTopOf="@+id/toolbar_add_schedule"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/days_spinner"
+        app:layout_constraintVertical_bias="0.641" />
+
     <Spinner
         android:id="@+id/object"
         android:layout_width="182dp"
@@ -35,6 +51,8 @@
         app:layout_constraintHorizontal_bias="0.956"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/text_blueDark"
         app:layout_constraintVertical_bias="0.38" />
 
     <EditText
@@ -68,13 +86,13 @@
 
     <Button
         android:id="@+id/btn_send"
-        android:layout_width="wrap_content"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="272dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:background="@drawable/border"
         android:text="Добавить"
         app:layout_constraintBottom_toBottomOf="parent"

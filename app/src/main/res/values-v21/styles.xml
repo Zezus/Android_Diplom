@@ -8,5 +8,6 @@
         <item name="android:textColorPrimary">@color/text_blueDark</item>
         <item name="colorAccent">@color/text_blueDark</item>
         <item name="android:colorBackground">@color/BlueDark2</item>
+        <item name="android:textColorSecondary">@color/text_blueDark</item>
     </style>
 </resources>

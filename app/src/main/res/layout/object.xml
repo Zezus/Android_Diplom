@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginRight="5dp"
-        android:background="@color/white"
+        android:background="@color/BlueDark2"
         android:elevation="10dp"
         android:outlineProvider="bounds"
         android:padding="10dp"
@@ -31,7 +31,7 @@
             android:layout_gravity="end|bottom"
             android:layout_margin="10dp"
             android:src="@drawable/ic_deletewhite"
-            app:backgroundTint="@android:color/white"
+            app:backgroundTint="@color/text_blueDark"
             app:fabSize="mini" />
 
         <LinearLayout
@@ -49,8 +49,8 @@
                 android:fontFamily="@font/rus2"
                 android:padding="5dp"
                 android:text="object"
-                android:textColor="@color/color_schedule"
-                android:textSize="23dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/title_text_size"
                 android:textStyle="bold" />
 
             <TextView
@@ -60,8 +60,8 @@
                 android:fontFamily="@font/rus2"
                 android:padding="5dp"
                 android:text="teacher"
-                android:textColor="@color/black"
-                android:textSize="16dp"
+                android:textColor="@color/text_blueDark"
+                android:textSize="@dimen/text_text_size"
                 android:textStyle="bold" />
 
         </LinearLayout>

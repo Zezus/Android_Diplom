@@ -30,8 +30,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/am_toolbar">
-
-
         <android.support.design.widget.NavigationView
             android:id="@+id/nav_view"
             android:layout_width="wrap_content"
@@ -41,9 +39,10 @@
             android:background="@color/blueDark_main"
             app:itemIconTint="@color/white"
             app:itemTextColor="@color/white"
-            app:menu="@menu/drawer_menu"></android.support.design.widget.NavigationView>
+            app:menu="@menu/drawer_menu">
 
-
+        </android.support.design.widget.NavigationView>
     </android.support.v4.widget.DrawerLayout>
+
 </RelativeLayout>
 
