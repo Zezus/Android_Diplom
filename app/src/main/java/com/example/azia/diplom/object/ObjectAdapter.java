@@ -2,6 +2,7 @@ package com.example.azia.diplom.object;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
@@ -70,6 +71,8 @@ public class ObjectAdapter extends RecyclerView.Adapter<ObjectAdapter.ViewHolder
                                 TastyToast.INFO);
                         dbSQL.close();
                         dialog.cancel();
+                        Intent intent = new Intent(context, ObjectActivity.class);
+                        context.startActivity(intent);
                     }
                 })
                         .setNegativeListener("НЕТ", new ColorDialog.OnNegativeListener() {

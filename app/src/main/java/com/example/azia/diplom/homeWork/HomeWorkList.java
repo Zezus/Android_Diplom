@@ -24,9 +24,11 @@ public class HomeWorkList implements Parcelable {
     private String date;
     private String teacher;
     private Bitmap image;
+    private Boolean flag;
 
     public HomeWorkList() {
     }
+
 
 
     public HomeWorkList(Parcel in) {
@@ -39,6 +41,7 @@ public class HomeWorkList implements Parcelable {
         data[4] = String.valueOf(teacher);
         data[5] = String.valueOf(image);
     }
+
 
     public int getId() {
         return id;
@@ -88,6 +91,13 @@ public class HomeWorkList implements Parcelable {
         this.image = image;
     }
 
+    public Boolean getFlag() {
+        return flag;
+    }
+
+    public void setFlag(Boolean flag) {
+        this.flag = flag;
+    }
 
     @Override
     public int describeContents() {

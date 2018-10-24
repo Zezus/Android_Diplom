@@ -132,8 +132,10 @@
 
             <ImageView
                 android:id="@+id/hw_iv_image"
-                android:layout_width="@dimen/image_size"
-                android:layout_height="@dimen/image_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxHeight="@dimen/image_size"
+                android:maxWidth="@dimen/image_size"
                 app:srcCompat="@mipmap/icon" />
 
 

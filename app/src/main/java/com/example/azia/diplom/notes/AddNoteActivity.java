@@ -11,6 +11,8 @@ import android.widget.Toast;
 import com.example.azia.diplom.R;
 import com.example.azia.diplom.dataBase.DBNotesHelper;
 
+import cn.refactor.lib.colordialog.PromptDialog;
+
 public class AddNoteActivity extends AppCompatActivity {
 
     public DBNotesHelper dbSQL;
@@ -30,17 +32,31 @@ public class AddNoteActivity extends AppCompatActivity {
         btn_send.setOnClickListener(view -> {
             String note_v = noteET.getText().toString();
 
-            dbSQL = new DBNotesHelper(getApplicationContext());
-            sqLiteDatabase = dbSQL.getWritableDatabase();
-            dbSQL.addInfo(note_v, sqLiteDatabase);
-            Toast.makeText(getApplicationContext(), "Запись добавлена", Toast.LENGTH_LONG).show();
-            dbSQL.close();
+            if (note_v.length() == 0) {
+                new PromptDialog(this)
+                        .setDialogType(PromptDialog.DIALOG_TYPE_WARNING)
+                        .setAnimationEnable(true)
+                        .setTitleText("")
+                        .setContentText("Заполните все поля")
+                        .setPositiveListener("OK", new PromptDialog.OnPositiveListener() {
+                            @Override
+                            public void onClick(PromptDialog dialog) {
+                                dialog.dismiss();
+                            }
+                        }).show();
+            } else {
+
+                dbSQL = new DBNotesHelper(getApplicationContext());
+                sqLiteDatabase = dbSQL.getWritableDatabase();
+                dbSQL.addInfo(note_v, sqLiteDatabase);
+                Toast.makeText(getApplicationContext(), "Запись добавлена", Toast.LENGTH_LONG).show();
+                dbSQL.close();
 
 
-            Intent intent = new Intent();
-            intent.setClass(AddNoteActivity.this, NoteActivity.class);
-            startActivity(intent);
-
+                Intent intent = new Intent();
+                intent.setClass(AddNoteActivity.this, NoteActivity.class);
+                startActivity(intent);
+            }
         });
     }
 }

@@ -17,7 +17,7 @@ import java.util.Locale;
 
 public class TimerActivity extends AppCompatActivity {
 
-    private static final long START_TIME_IN_MILLIS = 5000;
+    private static final long START_TIME_IN_MILLIS = 1500000;
 
     private TextView mTextViewCountDown;
     private FloatingActionButton mButtonStartPause;
@@ -41,7 +41,6 @@ public class TimerActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         getSupportActionBar().setIcon(R.drawable.ic_timer_white);
-        getSupportActionBar().setTitle("        Timer");
 
         mTextViewCountDown = findViewById(R.id.textView_countdown);
         mButtonStartPause = findViewById(R.id.fab_start);
