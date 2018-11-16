@@ -19,15 +19,17 @@ public class NoteList implements Parcelable {
 
     private int id;
     private String note;
+    private String title;
 
     public NoteList() {
     }
 
     public NoteList(Parcel in) {
-        String[] data = new String[2];
+        String[] data = new String[3];
         in.readStringArray(data);
         data[0] = String.valueOf(id);
         data[1] = note;
+        data[2] = title;
     }
 
     public int getId() {
@@ -46,6 +48,13 @@ public class NoteList implements Parcelable {
         this.note = object;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     @Override
     public int describeContents() {

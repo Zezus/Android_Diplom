@@ -2,10 +2,12 @@ package com.example.azia.diplom.homeWork;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -27,6 +29,7 @@ import com.example.azia.diplom.R;
 import com.example.azia.diplom.dataBase.DBHomeWorkHelper;
 import com.example.azia.diplom.dataBase.DBObjectHelper;
 import com.example.azia.diplom.object.ObjectList;
+import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
@@ -60,6 +63,44 @@ public class AddHomeWorkActivity extends AppCompatActivity implements DatePicker
     private FloatingActionButton imageSelect;
     String temp;
     private FloatingActionButton deleteImage;
+    private Uri imageUri;
+
+    private static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+
+        if (height > reqHeight || width > reqWidth) {
+            final int halfHeight = height / 2;
+            final int halfWidth = width / 2;
+
+            while ((halfHeight / inSampleSize) >= reqHeight && (halfWidth / inSampleSize) >= reqWidth) {
+                inSampleSize *= 2;
+            }
+        }
+        return inSampleSize;
+    }
+
+    public static Bitmap decodeSampledBitmapFromResource(Resources res, int resId, int reqWidth, int reqHeight) {
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeResource(res, resId, options);
+        options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
+        options.inJustDecodeBounds = false;
+        return BitmapFactory.decodeResource(res, resId, options);
+    }
+
+
+    public String BitMapToString(Bitmap bitmap) {
+        if (bitmap != null) {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            byte[] b = baos.toByteArray();
+            temp = Base64.encodeToString(b, Base64.DEFAULT);
+        } else temp = "-";
+
+        return temp;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,7 +205,7 @@ public class AddHomeWorkActivity extends AppCompatActivity implements DatePicker
             String task_v = task.getText().toString();
             String date_v = date.toString();
             String teacher_v = objectLists.get(teacherPos).getTeacher();
-            String image_v = BitMapToString(selectedImage).toString();
+            String image_v = imageUri.toString();
 
             if (object_v.length() == 0 || task_v.length() == 0 || date_v.length() == 0 || teacher_v.length() == 0) {
                 new PromptDialog(this)
@@ -208,15 +249,18 @@ public class AddHomeWorkActivity extends AppCompatActivity implements DatePicker
                         imageView.setVisibility(View.VISIBLE);
                         //Получаем URI изображения, преобразуем его в Bitmap
                         //объект и отображаем в элементе ImageView нашего интерфейса:
-                        final Uri imageUri = imageReturnedIntent.getData();
+                        imageUri = imageReturnedIntent.getData();
                         final InputStream imageStream = getContentResolver().openInputStream(imageUri);
                         selectedImage = BitmapFactory.decodeStream(imageStream);
-
                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
                         selectedImage.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                         byte[] b = baos.toByteArray();
+
+                        Picasso.with(getApplicationContext()).load(imageUri).into(imageView);
+                        // imageView.setImageBitmap(getResizedBitmap(selectedImage,200, 200));
+                        //    imageView.setImageBitmap(decodeSampledBitmapFromResource(getResources(), selectedImage.getGenerationId(), 150,150));
                         if (Integer.valueOf(b.length) < 1215000) {
-                            imageView.setImageBitmap(selectedImage);
+                            //imageView.setImageBitmap(selectedImage);
                         } else {
                             new PromptDialog(this)
                                     .setDialogType(PromptDialog.DIALOG_TYPE_INFO)
@@ -242,18 +286,24 @@ public class AddHomeWorkActivity extends AppCompatActivity implements DatePicker
         }
     }
 
+    public Bitmap getResizedBitmap(Bitmap bm, int newHeight, int newWidth) {
+        int width = bm.getWidth();
+        int height = bm.getHeight();
+        float scaleWidth = ((float) newWidth) / width;
+        float scaleHeight = ((float) newHeight) / height;
 
+        // create a matrix for the manipulation
+        Matrix matrix = new Matrix();
 
-    public String BitMapToString(Bitmap bitmap) {
-        if (bitmap != null) {
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-            byte[] b = baos.toByteArray();
-            temp = Base64.encodeToString(b, Base64.DEFAULT);
-        } else temp = "-";
+        // resize the bit map
+        matrix.postScale(scaleWidth, scaleHeight);
 
-        return temp;
+        // recreate the new Bitmap
+        Bitmap resizedBitmap = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
+
+        return resizedBitmap;
     }
+
 
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int day) {

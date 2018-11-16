@@ -53,6 +53,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
         sqLiteDatabase = dbSQL.getWritableDatabase();
 
         final NoteList noteList = noteLists.get(position);
+        holder.titleTV.setText(noteList.getTitle());
         holder.noteTV.setText(noteList.getNote());
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,6 +111,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView noteTV;
+        TextView titleTV;
         FloatingActionButton delete;
 
 
@@ -117,6 +119,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.ViewHolder> {
             super(itemView);
 
             noteTV = itemView.findViewById(R.id.note_note_et);
+            titleTV = itemView.findViewById(R.id.note_title_et);
             delete = itemView.findViewById(R.id.del_note);
 
         }

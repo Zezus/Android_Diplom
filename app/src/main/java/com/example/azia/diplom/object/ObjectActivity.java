@@ -1,6 +1,5 @@
 package com.example.azia.diplom.object;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
@@ -37,9 +36,13 @@ public class ObjectActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.setClass(ObjectActivity.this, AddObjectActivity.class);
-                startActivity(intent);
+
+                AddObjectSheet addObjectSheet = new AddObjectSheet();
+                addObjectSheet.show(getSupportFragmentManager(), "example");
+
+                //Intent intent = new Intent();
+                // intent.setClass(ObjectActivity.this, AddObjectActivity.class);
+                // startActivity(intent);
             }
         });
     }

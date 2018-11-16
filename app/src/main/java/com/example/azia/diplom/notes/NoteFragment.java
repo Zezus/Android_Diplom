@@ -43,11 +43,13 @@ public class NoteFragment extends Fragment {
         if (cursor.moveToFirst()) {
             do {
 
-                String note, id;
+                String note, title, id;
                 note = cursor.getString(0);
-                id = cursor.getString(1);
+                title = cursor.getString(1);
+                id = cursor.getString(2);
                 NoteList note1 = new NoteList();
                 note1.setNote(note);
+                note1.setTitle(title);
                 note1.setId(Integer.parseInt(id));
                 noteLists.add(note1);
             } while (cursor.moveToNext());

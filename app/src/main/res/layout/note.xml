@@ -8,11 +8,17 @@
     <RelativeLayout
         android:id="@+id/ob_rl"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:orientation="horizontal"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginRight="5dp"
+        android:background="@color/BlueDark2"
+        android:elevation="10dp"
+        android:outlineProvider="bounds"
+        android:padding="10dp"
+        android:paddingBottom="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
 
@@ -34,6 +40,28 @@
             android:layout_toRightOf="@id/del_note"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/note_title_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/rus2"
+                android:maxLines="20"
+                android:scrollbars="vertical"
+                android:text="title"
+                android:textColor="@color/white"
+                android:textSize="@dimen/title_text_size"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.015" />
 
             <TextView
                 android:id="@+id/note_note_et"
@@ -48,7 +76,7 @@
                 android:maxLines="20"
                 android:scrollbars="vertical"
                 android:text="note"
-                android:textColor="@color/white"
+                android:textColor="@color/text_blueDark"
                 android:textSize="@dimen/text_text_size"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"

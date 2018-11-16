@@ -65,7 +65,7 @@ public class HomeWorkFragment extends Fragment {
                 homeWork1.setTask(task);
                 homeWork1.setDate(date);
                 homeWork1.setTeacher(teacher);
-                homeWork1.setImage(StringToBitMap(image));
+                homeWork1.setImage(image);
                 homeWork1.setId(Integer.parseInt(id));
                 homeWorkLists.add(homeWork1);
             } while (cursor.moveToNext());

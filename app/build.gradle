@@ -42,5 +42,4 @@ dependencies {
     compile 'com.sdsmdg.tastytoast:tastytoast:0.1.1'
     compile 'com.github.andyxialm:ColorDialog:1.0.0'
     compile 'com.github.jgabrielfreitas:BlurImageView:1.0.1'
-
 }

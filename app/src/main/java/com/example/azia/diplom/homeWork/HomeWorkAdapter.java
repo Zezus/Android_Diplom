@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import com.example.azia.diplom.R;
 import com.example.azia.diplom.dataBase.DBHomeWorkHelper;
 import com.sdsmdg.tastytoast.TastyToast;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -104,7 +106,8 @@ public class HomeWorkAdapter extends RecyclerView.Adapter<HomeWorkAdapter.ViewHo
         holder.dateTV.setText(homeWorkList.getDate());
         holder.teacherTV.setText(homeWorkList.getTeacher());
 
-        holder.imageIV.setImageBitmap(homeWorkList.getImage());
+        Picasso.with(context).load(homeWorkList.getImage()).resize(500, 0).into(holder.imageIV);
+        //holder.imageIV.setImageBitmap(getResizedBitmap(homeWorkList.getImage(), 200, 200));
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -152,6 +155,25 @@ public class HomeWorkAdapter extends RecyclerView.Adapter<HomeWorkAdapter.ViewHo
             }
         });
 
+    }
+
+    public Bitmap getResizedBitmap(Bitmap bm, int newHeight, int newWidth) {
+
+        int width = bm.getWidth();
+        int height = bm.getHeight();
+        float scaleWidth = ((float) newWidth) / width;
+        float scaleHeight = ((float) newHeight) / height;
+
+        // create a matrix for the manipulation
+        Matrix matrix = new Matrix();
+
+        // resize the bit map
+        matrix.postScale(scaleWidth, scaleHeight);
+
+        // recreate the new Bitmap
+        Bitmap resizedBitmap = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
+
+        return resizedBitmap;
     }
 
 
