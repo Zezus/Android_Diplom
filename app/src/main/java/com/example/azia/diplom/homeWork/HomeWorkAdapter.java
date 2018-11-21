@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.azia.diplom.R;
@@ -32,6 +33,8 @@ public class HomeWorkAdapter extends RecyclerView.Adapter<HomeWorkAdapter.ViewHo
     private HomeWorkActivity mainActivity;
     private Dialog dialog;
     private Boolean flag = false;
+    private Boolean isImageFitToScreen = true;
+    private String fullScreenInd;
 
 
     public HomeWorkAdapter(Context context, List<HomeWorkList> homeWorkLists, HomeWorkActivity mainActivity) {
@@ -107,6 +110,21 @@ public class HomeWorkAdapter extends RecyclerView.Adapter<HomeWorkAdapter.ViewHo
         holder.teacherTV.setText(homeWorkList.getTeacher());
 
         Picasso.with(context).load(homeWorkList.getImage()).resize(500, 0).into(holder.imageIV);
+
+        holder.imageIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isImageFitToScreen) {
+                    isImageFitToScreen = false;
+                    holder.imageIV.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                    holder.imageIV.setAdjustViewBounds(true);
+                } else {
+                    isImageFitToScreen = true;
+                    holder.imageIV.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
+                    holder.imageIV.setScaleType(ImageView.ScaleType.FIT_XY);
+                }
+            }
+        });
         //holder.imageIV.setImageBitmap(getResizedBitmap(homeWorkList.getImage(), 200, 200));
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override

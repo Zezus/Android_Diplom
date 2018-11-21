@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.azia.diplom.R;
 import com.example.azia.diplom.dataBase.DBObjectHelper;
@@ -45,99 +44,15 @@ public class AddObjectSheet extends BottomSheetDialogFragment {
         object = v.findViewById(R.id.ob_et_object_sheet);
 
         btn_send.setOnClickListener(view -> {
-            String object_v = object.getText().toString();
-            String teacher_v = teacher.getText().toString();
-
-            if (object_v.length() == 0 || teacher_v.length() == 0) {
-                new PromptDialog(getContext())
-                        .setDialogType(PromptDialog.DIALOG_TYPE_WARNING)
-                        .setAnimationEnable(true)
-                        .setTitleText("")
-                        .setContentText("Заполните все поля")
-                        .setPositiveListener("OK", new PromptDialog.OnPositiveListener() {
-                            @Override
-                            public void onClick(PromptDialog dialog) {
-                                dialog.dismiss();
-                            }
-                        }).show();
-
-            } else {
-
-                dbSQL = new DBObjectHelper(getContext());
-                sqLiteDatabase = dbSQL.getWritableDatabase();
-                dbSQL.addInfo(object_v, teacher_v, sqLiteDatabase);
-                Toast.makeText(getContext(), "Предмет и преподаватель добавлены", Toast.LENGTH_LONG).show();
-                dbSQL.close();
-
-
-                Intent intent = new Intent(getContext(), ObjectActivity.class);
-                getActivity().startActivity(intent);
-            }
-
+            Send();
         });
 
         fab_send1.setOnClickListener(view -> {
-            String object_v = object.getText().toString();
-            String teacher_v = teacher.getText().toString();
-
-            if (object_v.length() == 0 || teacher_v.length() == 0) {
-                new PromptDialog(getContext())
-                        .setDialogType(PromptDialog.DIALOG_TYPE_WARNING)
-                        .setAnimationEnable(true)
-                        .setTitleText("")
-                        .setContentText("Заполните все поля")
-                        .setPositiveListener("OK", new PromptDialog.OnPositiveListener() {
-                            @Override
-                            public void onClick(PromptDialog dialog) {
-                                dialog.dismiss();
-                            }
-                        }).show();
-
-            } else {
-
-                dbSQL = new DBObjectHelper(getContext());
-                sqLiteDatabase = dbSQL.getWritableDatabase();
-                dbSQL.addInfo(object_v, teacher_v, sqLiteDatabase);
-                Toast.makeText(getContext(), "Предмет и преподаватель добавлены", Toast.LENGTH_LONG).show();
-                dbSQL.close();
-
-
-                Intent intent = new Intent(getContext(), ObjectActivity.class);
-                getActivity().startActivity(intent);
-            }
-
+            Send();
         });
 
         fab_send2.setOnClickListener(view -> {
-            String object_v = object.getText().toString();
-            String teacher_v = teacher.getText().toString();
-
-            if (object_v.length() == 0 || teacher_v.length() == 0) {
-                new PromptDialog(getContext())
-                        .setDialogType(PromptDialog.DIALOG_TYPE_WARNING)
-                        .setAnimationEnable(true)
-                        .setTitleText("")
-                        .setContentText("Заполните все поля")
-                        .setPositiveListener("OK", new PromptDialog.OnPositiveListener() {
-                            @Override
-                            public void onClick(PromptDialog dialog) {
-                                dialog.dismiss();
-                            }
-                        }).show();
-
-            } else {
-
-                dbSQL = new DBObjectHelper(getContext());
-                sqLiteDatabase = dbSQL.getWritableDatabase();
-                dbSQL.addInfo(object_v, teacher_v, sqLiteDatabase);
-                TastyToast.makeText(getContext(), "Добавлено  !", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
-                dbSQL.close();
-
-
-                Intent intent = new Intent(getContext(), ObjectActivity.class);
-                getActivity().startActivity(intent);
-            }
-
+            Send();
         });
 
         fab_keyboard.setOnClickListener(view -> {
@@ -146,5 +61,36 @@ public class AddObjectSheet extends BottomSheetDialogFragment {
         });
 
         return v;
+    }
+
+    public void Send() {
+        String object_v = object.getText().toString();
+        String teacher_v = teacher.getText().toString();
+
+        if (object_v.length() == 0 || teacher_v.length() == 0) {
+            new PromptDialog(getContext())
+                    .setDialogType(PromptDialog.DIALOG_TYPE_WARNING)
+                    .setAnimationEnable(true)
+                    .setTitleText("")
+                    .setContentText("Заполните все поля")
+                    .setPositiveListener("OK", new PromptDialog.OnPositiveListener() {
+                        @Override
+                        public void onClick(PromptDialog dialog) {
+                            dialog.dismiss();
+                        }
+                    }).show();
+
+        } else {
+
+            dbSQL = new DBObjectHelper(getContext());
+            sqLiteDatabase = dbSQL.getWritableDatabase();
+            dbSQL.addInfo(object_v, teacher_v, sqLiteDatabase);
+            TastyToast.makeText(getContext(), "Добавлено  !", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
+            dbSQL.close();
+
+
+            Intent intent = new Intent(getContext(), ObjectActivity.class);
+            getActivity().startActivity(intent);
+        }
     }
 }

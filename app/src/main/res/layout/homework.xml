@@ -136,6 +136,7 @@
                 android:layout_height="wrap_content"
                 android:maxHeight="@dimen/image_size"
                 android:maxWidth="@dimen/image_size"
+                android:adjustViewBounds="true"
                 android:background="@drawable/border"
                 app:srcCompat="@mipmap/icon" />
 

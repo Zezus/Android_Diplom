@@ -16,10 +16,29 @@
         app:layout_scrollFlags="scroll|enterAlways"
         app:title="Добавить запись " />
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/note_fab_keyboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:theme="@style/BlackTheme"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.975"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_add_note"
+        app:layout_constraintVertical_bias="0.017"
+        app:srcCompat="@drawable/ic_keyboard_white" />
+
     <EditText
         android:id="@+id/noteadd_note"
         android:layout_width="340dp"
-        android:layout_height="200dp"
+        android:layout_height="180dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -27,12 +46,13 @@
         android:gravity="bottom"
         android:hint="Запись"
         android:maxHeight="300dp"
-        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:textColorHint="@color/text_blueDark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_add_note"
-        app:layout_constraintVertical_bias="0.085" />
+        app:layout_constraintVertical_bias="0.247" />
 
     <EditText
         android:id="@+id/noteadd_title"
@@ -43,12 +63,13 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:hint="Заголовок"
-        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:textColorHint="@color/text_blueDark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/noteadd_note"
-        app:layout_constraintVertical_bias="0.084" />
+        app:layout_constraintVertical_bias="0.041" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_note_timeadd"
@@ -65,7 +86,7 @@
         app:layout_constraintHorizontal_bias="0.935"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/noteadd_note"
-        app:layout_constraintVertical_bias="0.556"
+        app:layout_constraintVertical_bias="0.465"
         app:srcCompat="@drawable/ic_timer_white" />
 
     <EditText
@@ -79,12 +100,13 @@
         android:ems="10"
         android:focusable="false"
         android:hint=""
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.693"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/noteadd_note"
-        app:layout_constraintVertical_bias="0.542" />
+        app:layout_constraintVertical_bias="0.48" />
 
     <Button
         android:id="@+id/noteadd_date_bt"
@@ -96,12 +118,13 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Выберите дату"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.091"
+        app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/noteadd_note"
-        app:layout_constraintVertical_bias="0.584" />
+        app:layout_constraintVertical_bias="0.491" />
 
     <View
         android:id="@+id/line"
@@ -132,10 +155,30 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/border"
         android:text="Добавить"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.964" />
+
+    <Switch
+        android:id="@+id/note_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Напоминание"
+        android:textColor="@color/text_blueDark"
+        android:textSize="18dp"
+        android:theme="@style/BlackTheme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.033"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_add_note"
+        app:layout_constraintVertical_bias="0.044" />
 
 </android.support.constraint.ConstraintLayout>

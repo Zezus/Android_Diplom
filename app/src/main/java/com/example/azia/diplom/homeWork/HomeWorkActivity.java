@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.azia.diplom.R;
+import com.example.azia.diplom.schedule.ScheduleActivity;
 
 public class HomeWorkActivity extends AppCompatActivity {
 
@@ -57,6 +58,13 @@ public class HomeWorkActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(HomeWorkActivity.this, ScheduleActivity.class);
+        startActivity(intent);
+        finish();
     }
 
 }

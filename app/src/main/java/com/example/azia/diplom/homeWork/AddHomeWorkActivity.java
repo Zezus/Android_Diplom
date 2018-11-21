@@ -176,9 +176,9 @@ public class AddHomeWorkActivity extends AppCompatActivity implements DatePicker
 
         objectSpinner.setPrompt("Выберите предмет");
         // Создаем адаптер ArrayAdapter с помощью массива строк и стандартной разметки элемета spinner
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, objects);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_text_layout, objects);
         // Определяем разметку для использования при выборе элемента
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(R.layout.spinner_text_layout);
         // Применяем адаптер к элементу spinner
         objectSpinner.setAdapter(adapter);
 
@@ -259,22 +259,6 @@ public class AddHomeWorkActivity extends AppCompatActivity implements DatePicker
                         Picasso.with(getApplicationContext()).load(imageUri).into(imageView);
                         // imageView.setImageBitmap(getResizedBitmap(selectedImage,200, 200));
                         //    imageView.setImageBitmap(decodeSampledBitmapFromResource(getResources(), selectedImage.getGenerationId(), 150,150));
-                        if (Integer.valueOf(b.length) < 1215000) {
-                            //imageView.setImageBitmap(selectedImage);
-                        } else {
-                            new PromptDialog(this)
-                                    .setDialogType(PromptDialog.DIALOG_TYPE_INFO)
-                                    .setAnimationEnable(true)
-                                    .setTitleText("INFO")
-                                    .setContentText("Вы выбрали слишком большой файл, пожалуйста выберите другое фото. Мы над этим работаем")
-                                    .setPositiveListener("OK", new PromptDialog.OnPositiveListener() {
-                                        @Override
-                                        public void onClick(PromptDialog dialog) {
-                                            dialog.dismiss();
-                                        }
-                                    }).show();
-                        }
-
 
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();

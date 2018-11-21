@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.azia.diplom.R;
+import com.example.azia.diplom.schedule.ScheduleActivity;
 
 public class NoteActivity extends AppCompatActivity {
 
@@ -48,14 +49,17 @@ public class NoteActivity extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.home) {
-            this.finish();
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
         }
-
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(NoteActivity.this, ScheduleActivity.class);
+        startActivity(intent);
+        finish();
     }
 
 }

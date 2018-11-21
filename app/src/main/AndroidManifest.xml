@@ -19,8 +19,9 @@
         android:theme="@style/ThemeApp1">
 
         <activity
-            android:name=".mainMenu.MainActivity"
+            android:name=".schedule.ScheduleActivity"
             android:screenOrientation="portrait"
+            android:noHistory="true"
             android:theme="@style/BlackTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,21 +29,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".schedule.ScheduleActivity"
-            android:label="@string/title_activity_main2"
-            android:theme="@style/BlackTheme">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".mainMenu.MainActivity" />
-        </activity>
+
         <activity
             android:name=".timer.TimerActivity"
             android:label="@string/title_activity_timer"
             android:theme="@style/BlackTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".mainMenu.MainActivity" />
+                android:value=".schedule.ScheduleActivity" />
         </activity>
         <activity
             android:name=".object.ObjectActivity"
@@ -50,7 +44,7 @@
             android:theme="@style/BlackTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".mainMenu.MainActivity" />
+                android:value=".schedule.ScheduleActivity" />
         </activity>
         <activity
             android:name=".homeWork.HomeWorkActivity"
@@ -58,7 +52,7 @@
             android:theme="@style/BlackTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".mainMenu.MainActivity" />
+                android:value=".schedule.ScheduleActivity" />
         </activity>
         <activity
             android:name=".notes.NoteActivity"
@@ -66,7 +60,7 @@
             android:theme="@style/BlackTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".mainMenu.MainActivity" />
+                android:value=".schedule.ScheduleActivity" />
         </activity>
 
         <activity
