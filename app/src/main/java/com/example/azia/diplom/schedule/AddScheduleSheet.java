@@ -1,6 +1,7 @@
 package com.example.azia.diplom.schedule;
 
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -40,6 +42,7 @@ public class AddScheduleSheet extends BottomSheetDialogFragment implements TimeP
     public Button btn_send;
     public FloatingActionButton time_addstart;
     public FloatingActionButton time_addend;
+    public FloatingActionButton fab_keyboard;
     public String day;
     public String object;
     public DBScheduleHelper dbSQL;
@@ -52,8 +55,6 @@ public class AddScheduleSheet extends BottomSheetDialogFragment implements TimeP
     public TimePickerDialog.OnTimeSetListener timePickerListener = new TimePickerDialog.OnTimeSetListener() {
 
         Calendar c = Calendar.getInstance();
-        int hourr = c.get(Calendar.HOUR_OF_DAY);
-        int minutee = c.get(Calendar.MINUTE);
 
         @Override
         public void onTimeSet(TimePicker timePicker, int i, int i1) {
@@ -81,7 +82,6 @@ public class AddScheduleSheet extends BottomSheetDialogFragment implements TimeP
     Cursor cursor;
     String[] cities = {"Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота"};
     String[] objects;
-    int hour, minute;
     private ArrayList<ObjectList> objectLists;
 
     @Nullable
@@ -97,6 +97,7 @@ public class AddScheduleSheet extends BottomSheetDialogFragment implements TimeP
         btn_send = v.findViewById(R.id.btn_send);
         time_addstart = v.findViewById(R.id.fab_timeadd_start);
         time_addend = v.findViewById(R.id.fab_timeadd_end);
+        fab_keyboard = v.findViewById(R.id.schedule_fab_keyboard_sheet);
 
         /*time_addstart.setOnClickListener(view -> {
             flag1 = false;
@@ -111,6 +112,11 @@ public class AddScheduleSheet extends BottomSheetDialogFragment implements TimeP
             timePicker.show(getFragmentManager(), " time picker");
             flag2 = true;
         });*/
+
+        fab_keyboard.setOnClickListener(view -> {
+            InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
+        });
 
         time_addstart.setOnClickListener(view -> {
             flag1 = false;

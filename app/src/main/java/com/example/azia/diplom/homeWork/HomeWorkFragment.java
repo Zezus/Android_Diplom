@@ -18,6 +18,8 @@ import com.example.azia.diplom.R;
 import com.example.azia.diplom.dataBase.DBHomeWorkHelper;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 
 /**
@@ -30,6 +32,7 @@ public class HomeWorkFragment extends Fragment {
     Cursor cursor;
     private RecyclerView itemRecyclerView;
     private ArrayList<HomeWorkList> homeWorkLists;
+    private HomeWorkAdapter homeWorkAdapter;
 
     public HomeWorkFragment() {
         // Required empty public constructor
@@ -52,26 +55,45 @@ public class HomeWorkFragment extends Fragment {
         if (cursor.moveToFirst()) {
             do {
 
-                String object, task, date, teacher, image, id;
+                String object, task, date, teacher, image, date_sort, id;
                 //String object, task, date, teacher, id;
                 object = cursor.getString(0);
                 task = cursor.getString(1);
                 date = cursor.getString(2);
                 teacher = cursor.getString(3);
                 image = cursor.getString(4);
-                id = cursor.getString(5);
+                date_sort = cursor.getString(5);
+                id = cursor.getString(6);
                 HomeWorkList homeWork1 = new HomeWorkList();
                 homeWork1.setObject(object);
                 homeWork1.setTask(task);
                 homeWork1.setDate(date);
                 homeWork1.setTeacher(teacher);
                 homeWork1.setImage(image);
+                homeWork1.setDate_sort(date_sort);
                 homeWork1.setId(Integer.parseInt(id));
                 homeWorkLists.add(homeWork1);
             } while (cursor.moveToNext());
         }
 
+        /*Collections.sort(homeWorkLists, new Comparator<HomeWorkList>() {
+            @Override
+            public int compare(HomeWorkList lhs, HomeWorkList rhs) {
+                return Integer.valueOf(lhs.getDate()).compareTo(Integer.valueOf(rhs.getDate()));
+            }
+        });*/
+
+        Collections.sort(homeWorkLists, new Comparator<HomeWorkList>() {
+            @Override
+            public int compare(HomeWorkList lhs, HomeWorkList rhs) {
+                return Integer.valueOf(lhs.getDate_sort()).compareTo(Integer.valueOf(rhs.getDate_sort()));
+            }
+        });
         itemRecyclerView.setAdapter(new HomeWorkAdapter(getContext(), homeWorkLists, (HomeWorkActivity) getActivity()));
+        homeWorkAdapter = (new HomeWorkAdapter(getContext(), homeWorkLists, (HomeWorkActivity) getActivity()));
+        homeWorkAdapter.notifyDataSetChanged();
+        itemRecyclerView.setAdapter(homeWorkAdapter);
+
 
         return view;
     }

@@ -7,8 +7,8 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
-
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -17,11 +17,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/ThemeApp1">
-
         <activity
             android:name=".schedule.ScheduleActivity"
-            android:screenOrientation="portrait"
             android:noHistory="true"
+            android:screenOrientation="portrait"
             android:theme="@style/BlackTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,7 +28,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".timer.TimerActivity"
             android:label="@string/title_activity_timer"
@@ -62,7 +60,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".schedule.ScheduleActivity" />
         </activity>
-
         <activity
             android:name=".homeWork.AddHomeWorkActivity"
             android:theme="@style/BlackTheme">
@@ -83,7 +80,6 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".object.ObjectActivity" />
-
         </activity>
         <activity
             android:name=".schedule.AddScheduleActivity"
@@ -92,12 +88,19 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".schedule.ScheduleActivity" />
-
         </activity>
 
         <receiver
             android:name=".notes.AlarmReceiver"
             android:process=":remote" />
+
+        <activity android:name=".homeWork.HomeWorkImageActivity" />
+        <activity
+            android:name=".WebSite.WolframActivity"
+            android:theme="@style/BlackTheme" />
+        <activity
+            android:name=".WebSite.WikipediaActivity"
+            android:theme="@style/BlackTheme" />
     </application>
 
 </manifest>

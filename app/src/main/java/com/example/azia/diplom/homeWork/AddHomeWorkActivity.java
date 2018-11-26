@@ -29,6 +29,7 @@ import com.example.azia.diplom.R;
 import com.example.azia.diplom.dataBase.DBHomeWorkHelper;
 import com.example.azia.diplom.dataBase.DBObjectHelper;
 import com.example.azia.diplom.object.ObjectList;
+import com.sdsmdg.tastytoast.TastyToast;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
@@ -58,6 +59,7 @@ public class AddHomeWorkActivity extends AppCompatActivity implements DatePicker
 
     private final int Pick_image = 1;
     public String date = "";
+    public String date_sort = "";
     private ImageView imageView;
     private Bitmap selectedImage;
     private FloatingActionButton imageSelect;
@@ -142,6 +144,7 @@ public class AddHomeWorkActivity extends AppCompatActivity implements DatePicker
             selectedImage = BitmapFactory.decodeStream(null);
             temp = "-";
             deleteImage.setVisibility(Button.INVISIBLE);
+            imageUri = null;
         });
 
 
@@ -205,7 +208,11 @@ public class AddHomeWorkActivity extends AppCompatActivity implements DatePicker
             String task_v = task.getText().toString();
             String date_v = date.toString();
             String teacher_v = objectLists.get(teacherPos).getTeacher();
-            String image_v = imageUri.toString();
+            String image_v;
+            if (imageUri == null) {
+                image_v = "";
+            } else image_v = imageUri.toString();
+            String date_sort_v = date_sort.toString();
 
             if (object_v.length() == 0 || task_v.length() == 0 || date_v.length() == 0 || teacher_v.length() == 0) {
                 new PromptDialog(this)
@@ -222,9 +229,10 @@ public class AddHomeWorkActivity extends AppCompatActivity implements DatePicker
             } else {
                 dbSQL = new DBHomeWorkHelper(getApplicationContext());
                 sqLiteDatabase = dbSQL.getWritableDatabase();
-                dbSQL.addInfo(object_v, task_v, date_v, teacher_v, image_v, sqLiteDatabase);
+                dbSQL.addInfo(object_v, task_v, date_v, teacher_v, image_v, date_sort_v, sqLiteDatabase);
                 //dbSQL.addInfo(object_v, task_v, date_v, teacher_v, sqLiteDatabase);
                 Toast.makeText(getApplicationContext(), "Домашнее задание добавлено ", Toast.LENGTH_LONG).show();
+                TastyToast.makeText(getApplicationContext(), "Домашнее задание добавлено ", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
                 dbSQL.close();
 
 
@@ -244,26 +252,26 @@ public class AddHomeWorkActivity extends AppCompatActivity implements DatePicker
 
         if (requestCode == Pick_image) {
             if (resultCode == RESULT_OK) {
-                    try {
-                        deleteImage.setVisibility(View.VISIBLE);
-                        imageView.setVisibility(View.VISIBLE);
-                        //Получаем URI изображения, преобразуем его в Bitmap
-                        //объект и отображаем в элементе ImageView нашего интерфейса:
-                        imageUri = imageReturnedIntent.getData();
-                        final InputStream imageStream = getContentResolver().openInputStream(imageUri);
-                        selectedImage = BitmapFactory.decodeStream(imageStream);
-                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                        selectedImage.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-                        byte[] b = baos.toByteArray();
+                try {
+                    deleteImage.setVisibility(View.VISIBLE);
+                    imageView.setVisibility(View.VISIBLE);
+                    //Получаем URI изображения, преобразуем его в Bitmap
+                    //объект и отображаем в элементе ImageView нашего интерфейса:
+                    imageUri = imageReturnedIntent.getData();
+                    final InputStream imageStream = getContentResolver().openInputStream(imageUri);
+                    selectedImage = BitmapFactory.decodeStream(imageStream);
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    selectedImage.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                    byte[] b = baos.toByteArray();
 
-                        Picasso.with(getApplicationContext()).load(imageUri).into(imageView);
-                        // imageView.setImageBitmap(getResizedBitmap(selectedImage,200, 200));
-                        //    imageView.setImageBitmap(decodeSampledBitmapFromResource(getResources(), selectedImage.getGenerationId(), 150,150));
+                    Picasso.with(getApplicationContext()).load(imageUri).into(imageView);
+                    // imageView.setImageBitmap(getResizedBitmap(selectedImage,200, 200));
+                    //    imageView.setImageBitmap(decodeSampledBitmapFromResource(getResources(), selectedImage.getGenerationId(), 150,150));
 
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
                 }
+            }
         }
         if (requestCode == Pick_imageNo) {
             selectedImage = BitmapFactory.decodeStream(null);
@@ -295,6 +303,7 @@ public class AddHomeWorkActivity extends AppCompatActivity implements DatePicker
         c.set(Calendar.YEAR, year);
         c.set(Calendar.MONTH, month);
         c.set(Calendar.DAY_OF_MONTH, day);
+        date_sort = year + "" + month + "" + day;
         date = String.format("%1$tA", c) + " - " + DateFormat.getDateInstance().format(c.getTime());
         String butText = String.format("%1$tA", c) + System.getProperty("line.separator") + DateFormat.getDateInstance().format(c.getTime());
         Button btn = findViewById(R.id.hwadd_date_bt);

@@ -12,7 +12,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.azia.diplom.R;
@@ -109,12 +108,15 @@ public class HomeWorkAdapter extends RecyclerView.Adapter<HomeWorkAdapter.ViewHo
         holder.dateTV.setText(homeWorkList.getDate());
         holder.teacherTV.setText(homeWorkList.getTeacher());
 
-        Picasso.with(context).load(homeWorkList.getImage()).resize(500, 0).into(holder.imageIV);
-
+        if (!homeWorkList.getImage().equals("")) {
+            Picasso.with(context).load(homeWorkList.getImage()).resize(500, 0).into(holder.imageIV);
+        } else {
+            holder.imageIV.setImageBitmap(null);
+        }
         holder.imageIV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isImageFitToScreen) {
+                /*if (isImageFitToScreen) {
                     isImageFitToScreen = false;
                     holder.imageIV.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
                     holder.imageIV.setAdjustViewBounds(true);
@@ -122,7 +124,10 @@ public class HomeWorkAdapter extends RecyclerView.Adapter<HomeWorkAdapter.ViewHo
                     isImageFitToScreen = true;
                     holder.imageIV.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
                     holder.imageIV.setScaleType(ImageView.ScaleType.FIT_XY);
-                }
+                }*/
+                Intent intent = new Intent(context, HomeWorkImageActivity.class);
+                intent.putExtra("image", homeWorkList.getImage());
+                context.startActivity(intent);
             }
         });
         //holder.imageIV.setImageBitmap(getResizedBitmap(homeWorkList.getImage(), 200, 200));

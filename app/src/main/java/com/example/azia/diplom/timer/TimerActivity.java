@@ -166,10 +166,6 @@ public class TimerActivity extends AppCompatActivity implements ListFragment.Cal
                 startActivity(i);
                 break;
 
-            case R.id.item_exit:
-                finish();
-                System.exit(0);
-                break;
 
             default:
                 fragmentClass = HomeFragment.class;
@@ -217,7 +213,6 @@ public class TimerActivity extends AppCompatActivity implements ListFragment.Cal
     }
 
 
-
     private void startTimer() {
         spinner.setVisibility(View.VISIBLE);
         mButtonStartPause.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_pause));
@@ -244,10 +239,13 @@ public class TimerActivity extends AppCompatActivity implements ListFragment.Cal
                 mButtonReset.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_stop_white));
                 notification();
                 seekBar.setEnabled(true);
-                seekBar.setProgress(0);
-                seekBar.setMax(100);
-                seekBar.setProgress(0);
-                seekBar.refreshDrawableState();
+                seekBar.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        seekBar.setProgress(0);
+                        seekBar.refreshDrawableState();
+                    }
+                });
             }
         }.start();
 

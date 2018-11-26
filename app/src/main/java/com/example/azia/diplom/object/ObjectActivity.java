@@ -104,11 +104,6 @@ public class ObjectActivity extends AppCompatActivity implements ListFragment.Ca
                 startActivity(i);
                 break;
 
-            case R.id.item_exit:
-                finish();
-                System.exit(0);
-                break;
-
             default:
                 fragmentClass = HomeFragment.class;
         }

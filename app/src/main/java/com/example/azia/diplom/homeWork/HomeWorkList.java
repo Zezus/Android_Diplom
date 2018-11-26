@@ -24,14 +24,14 @@ public class HomeWorkList implements Parcelable {
     private String teacher;
     private String image;
     private Boolean flag;
+    private String date_sort;
 
     public HomeWorkList() {
     }
 
 
-
     public HomeWorkList(Parcel in) {
-        String[] data = new String[6];
+        String[] data = new String[7];
         in.readStringArray(data);
         data[0] = String.valueOf(id);
         data[1] = String.valueOf(object);
@@ -39,8 +39,16 @@ public class HomeWorkList implements Parcelable {
         data[3] = String.valueOf(date);
         data[4] = String.valueOf(teacher);
         data[5] = String.valueOf(image);
+        data[6] = String.valueOf(date_sort);
     }
 
+    public String getDate_sort() {
+        return date_sort;
+    }
+
+    public void setDate_sort(String date_sort) {
+        this.date_sort = date_sort;
+    }
 
     public int getId() {
         return id;

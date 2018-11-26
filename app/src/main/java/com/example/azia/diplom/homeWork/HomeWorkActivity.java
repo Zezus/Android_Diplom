@@ -3,27 +3,49 @@ package com.example.azia.diplom.homeWork;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.example.azia.diplom.R;
+import com.example.azia.diplom.helpers.Item;
+import com.example.azia.diplom.mainMenu.HomeFragment;
+import com.example.azia.diplom.mainMenu.ListFragment;
+import com.example.azia.diplom.notes.NoteActivity;
+import com.example.azia.diplom.object.ObjectActivity;
 import com.example.azia.diplom.schedule.ScheduleActivity;
+import com.example.azia.diplom.timer.TimerActivity;
 
-public class HomeWorkActivity extends AppCompatActivity {
+public class HomeWorkActivity extends AppCompatActivity implements ListFragment.Callback, NavigationView.OnNavigationItemSelectedListener {
+
+    public Toolbar toolbar;
+    public DrawerLayout drawerLayout;
+    public NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_work);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        drawerLayout = findViewById(R.id.main_content_homework);
+        navigationView = findViewById(R.id.nav_view_homework);
+        toolbar = findViewById(R.id.toolbar_homework);
+        setSupportActionBar(toolbar);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
+                R.string.open, R.string.close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.bringToFront();
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager
@@ -44,6 +66,77 @@ public class HomeWorkActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        Class fragmentClass = null;
+        Intent i = null;
+
+        switch (item.getItemId()) {
+            case R.id.item_schedule:
+                i = new Intent(HomeWorkActivity.this, ScheduleActivity.class);
+                startActivity(i);
+                break;
+
+            case R.id.item_timer:
+                i = new Intent(HomeWorkActivity.this, TimerActivity.class);
+                startActivity(i);
+                break;
+
+            case R.id.item_object:
+                i = new Intent(HomeWorkActivity.this, ObjectActivity.class);
+                startActivity(i);
+                break;
+
+            case R.id.item_homework:
+                i = new Intent(HomeWorkActivity.this, HomeWorkActivity.class);
+                startActivity(i);
+                break;
+
+            case R.id.item_note:
+                i = new Intent(HomeWorkActivity.this, NoteActivity.class);
+                startActivity(i);
+                break;
+
+            default:
+                fragmentClass = HomeFragment.class;
+        }
+
+        drawerLayout.closeDrawer(GravityCompat.START);
+
+        return true;
+    }
+
+    @Override
+    public void changeFragmentClicked(View view, Item item) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+        if (item.getTitle() == "Расписание") {
+            Intent intent = new Intent();
+            intent.setClass(HomeWorkActivity.this, ScheduleActivity.class);
+            startActivity(intent);
+        } else if (item.getTitle() == "Таймер для выполнения \n\tдомашнего задания") {
+            Intent intent = new Intent();
+            intent.setClass(HomeWorkActivity.this, TimerActivity.class);
+            startActivity(intent);
+        } else if (item.getTitle() == "Предметы и \n\tпреподаватели") {
+            Intent intent = new Intent();
+            intent.setClass(HomeWorkActivity.this, ObjectActivity.class);
+            startActivity(intent);
+        } else if (item.getTitle() == "Домашнее задание") {
+            Intent intent = new Intent();
+            intent.setClass(HomeWorkActivity.this, HomeWorkActivity.class);
+            startActivity(intent);
+        } else if (item.getTitle() == "Записи") {
+            Intent intent = new Intent();
+            intent.setClass(HomeWorkActivity.this, NoteActivity.class);
+            startActivity(intent);
+        }
+        transaction.commit();
+
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

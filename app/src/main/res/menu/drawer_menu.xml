@@ -8,7 +8,7 @@
             android:title="Расписание" />
         <item
             android:id="@+id/item_timer"
-            android:icon="@drawable/ic_timer_white"
+            android:icon="@drawable/ic_timer"
             android:title="Таймер" />
         <item
             android:id="@+id/item_object"
@@ -20,11 +20,15 @@
             android:title="Домашнее задание" />
         <item
             android:id="@+id/item_note"
-            android:icon="@drawable/ic_notes"
+            android:icon="@drawable/ic_note"
             android:title="Быстрые записи" />
         <item
-            android:id="@+id/item_exit"
-            android:icon="@drawable/ic_exit"
-            android:title="Выход" />
+            android:id="@+id/item_walfram"
+            android:icon="@drawable/ic_wolfram"
+            android:title="WolframAlpha" />
+        <item
+            android:id="@+id/item_wikipedia"
+            android:icon="@drawable/ic_wikipedia"
+            android:title="Wikipedia" />
     </group>
 </menu>

@@ -100,11 +100,6 @@ public class MainActivity extends AppCompatActivity implements ListFragment.Call
                 startActivity(i);
                 break;
 
-            case R.id.item_exit:
-                finish();
-                System.exit(0);
-                break;
-
             default:
                 fragmentClass = HomeFragment.class;
         }
