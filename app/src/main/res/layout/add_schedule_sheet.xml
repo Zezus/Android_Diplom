@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@color/BlueDark2"
     android:gravity="center_horizontal"
     android:orientation="vertical"
@@ -29,8 +29,10 @@
             android:layout_margin="8dp"
             android:gravity="center_vertical"
             android:text="Предмет"
+            android:fontFamily="@font/rus2"
             android:textColor="@color/text_blueDark"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
         <Spinner
             android:id="@+id/object"
@@ -57,8 +59,10 @@
             android:layout_margin="8dp"
             android:gravity="center_vertical"
             android:text="Кабинет"
+            android:fontFamily="@font/rus2"
             android:textColor="@color/text_blueDark"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/room"
@@ -84,8 +88,10 @@
             android:layout_margin="8dp"
             android:gravity="center_vertical"
             android:text="Время урока"
+            android:fontFamily="@font/rus2"
             android:textColor="@color/text_blueDark"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -159,8 +165,10 @@
             android:layout_margin="8dp"
             android:gravity="center_vertical"
             android:text="День недели"
+            android:fontFamily="@font/rus2"
             android:textColor="@color/text_blueDark"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
         <Spinner
             android:id="@+id/days_spinner"
@@ -174,12 +182,7 @@
             android:theme="@style/BlackTheme" />
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_margin="8dp"
-        android:alpha="0.6"
-        android:background="@color/text_blueDark" />
+
 
     <Button
         android:id="@+id/btn_send"
@@ -189,6 +192,8 @@
         android:layout_margin="8dp"
         android:background="@drawable/border"
         android:text="Добавить"
-        android:textColor="@color/white" />
+        android:fontFamily="@font/font_prog"
+        android:textColor="@color/white"
+        android:textSize="17dp" />
 
 </LinearLayout>

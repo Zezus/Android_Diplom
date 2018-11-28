@@ -16,6 +16,7 @@ import android.view.View;
 import android.webkit.WebView;
 
 import com.example.azia.diplom.R;
+import com.example.azia.diplom.grade.GradeActivity;
 import com.example.azia.diplom.helpers.Item;
 import com.example.azia.diplom.homeWork.HomeWorkActivity;
 import com.example.azia.diplom.mainMenu.HomeFragment;
@@ -83,8 +84,18 @@ public class WolframActivity extends AppCompatActivity implements ListFragment.C
                 startActivity(i);
                 break;
 
+            case R.id.item_grade:
+                i = new Intent(WolframActivity.this, GradeActivity.class);
+                startActivity(i);
+                break;
+
             case R.id.item_note:
                 i = new Intent(WolframActivity.this, NoteActivity.class);
+                startActivity(i);
+                break;
+
+            case R.id.item_wikipedia:
+                i = new Intent(WolframActivity.this, WikipediaActivity.class);
                 startActivity(i);
                 break;
 
@@ -123,13 +134,21 @@ public class WolframActivity extends AppCompatActivity implements ListFragment.C
             Intent intent = new Intent();
             intent.setClass(WolframActivity.this, HomeWorkActivity.class);
             startActivity(intent);
+        } else if (item.getTitle() == "Оценки") {
+            Intent intent = new Intent();
+            intent.setClass(WolframActivity.this, GradeActivity.class);
+            startActivity(intent);
         } else if (item.getTitle() == "Записи") {
             Intent intent = new Intent();
             intent.setClass(WolframActivity.this, NoteActivity.class);
             startActivity(intent);
-        } else if (item.getTitle() == "Walfram Alpha") {
+        } else if (item.getTitle() == "Wolfram Alpha") {
             Intent intent = new Intent();
             intent.setClass(WolframActivity.this, WolframActivity.class);
+            startActivity(intent);
+        } else if (item.getTitle() == "Wikipedia") {
+            Intent intent = new Intent();
+            intent.setClass(WolframActivity.this, WikipediaActivity.class);
             startActivity(intent);
         }
         transaction.commit();

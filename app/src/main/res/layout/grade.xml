@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="8dp">
+
+
+    <RelativeLayout
+        android:id="@+id/ob_rl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@color/BlueDark2"
+        android:elevation="10dp"
+        android:orientation="horizontal"
+        android:outlineProvider="bounds"
+        android:padding="10dp"
+        android:paddingBottom="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <!--  <android.support.design.widget.FloatingActionButton
+              android:id="@+id/del_grade"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_gravity="end|bottom"
+              android:layout_margin="10dp"
+              android:src="@drawable/ic_deletewhite"
+              app:backgroundTint="@color/text_blueDark"
+              app:fabSize="mini" />-->
+
+        <LinearLayout
+            android:id="@+id/ob__ll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toEndOf="@id/del_ob"
+            android:layout_toRightOf="@id/del_ob"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/grade_tv_object"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rus2"
+                android:padding="5dp"
+                android:text="object"
+                android:textColor="@color/white"
+                android:textSize="@dimen/title_text_size"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/rus2"
+                    android:padding="5dp"
+                    android:text="Средний балл - "
+                    android:textColor="@color/text_blueDark"
+                    android:textSize="@dimen/text_text_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/grade_tv_avgrade"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/rus2"
+                    android:padding="5dp"
+                    android:text="avgrade"
+                    android:textColor="@color/text_blueDark"
+                    android:textSize="@dimen/text_text_size"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/grade_tv_grade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rus2"
+                android:padding="5dp"
+                android:text="grades"
+                android:textColor="@color/text_blueDark"
+                android:textSize="@dimen/text_text_size"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/grade_et_addgrade"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:digits="0123456789"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    android:paddingTop="25dp" />
+
+                <Button
+                    android:id="@+id/grade_btn_update"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/border"
+                    android:fontFamily="@font/font_prog"
+                    android:text="Добавить оценку"
+                    android:textColor="@color/white"
+                    android:textSize="17dp" />
+
+                <Button
+                    android:id="@+id/grade_btn_del"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/border"
+                    android:fontFamily="@font/font_prog"
+                    android:text="Удалить последнюю оценку"
+                    android:textColor="@color/white"
+                    android:textSize="16dp" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </RelativeLayout>
+</android.support.constraint.ConstraintLayout>

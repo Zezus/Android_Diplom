@@ -19,6 +19,10 @@
             android:icon="@drawable/ic_homework"
             android:title="Домашнее задание" />
         <item
+            android:id="@+id/item_grade"
+            android:icon="@drawable/ic_grade"
+            android:title="Оценки" />
+        <item
             android:id="@+id/item_note"
             android:icon="@drawable/ic_note"
             android:title="Быстрые записи" />

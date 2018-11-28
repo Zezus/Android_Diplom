@@ -28,8 +28,10 @@
         android:layout_marginTop="8dp"
         android:gravity="center_vertical"
         android:text="Предмет"
+        android:fontFamily="@font/rus2"
         android:textColor="@color/text_blueDark"
-        android:textSize="20dp" />
+        android:textSize="23dp"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -47,13 +49,7 @@
             android:backgroundTint="@color/white"
             android:ems="10"
             android:inputType="textMultiLine"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2"
-            app:layout_constraintVertical_bias="0.0" />
+            android:textColor="@color/white" />
 
 
         <android.support.design.widget.FloatingActionButton
@@ -77,13 +73,9 @@
         android:gravity="center_vertical"
         android:text="Преподаватель"
         android:textColor="@color/text_blueDark"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.036"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.578" />
+        android:fontFamily="@font/rus2"
+        android:textSize="23dp"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -101,13 +93,7 @@
             android:backgroundTint="@color/white"
             android:ems="10"
             android:inputType="textMultiLine"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3"
-            app:layout_constraintVertical_bias="0.0" />
+            android:textColor="@color/white" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/ob_fab_send_sheet2"
@@ -126,13 +112,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:alpha="0.6"
-        android:background="@color/text_blueDark"
-        app:layout_constraintBottom_toTopOf="@+id/ob_btn_send"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ob_et_teacher"
-        app:layout_constraintVertical_bias="0.91" />
+        android:background="@color/text_blueDark" />
 
     <Button
         android:id="@+id/ob_btn_send_sheet"
@@ -146,10 +126,7 @@
         android:background="@drawable/border"
         android:text="Добавить"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.984" />
+        android:fontFamily="@font/font_prog"
+        android:textSize="17dp" />
 
 </LinearLayout>

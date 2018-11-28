@@ -8,10 +8,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.azia.diplom.R;
+import com.example.azia.diplom.dataBase.DBGradeHelper;
 import com.example.azia.diplom.dataBase.DBObjectHelper;
+import com.sdsmdg.tastytoast.TastyToast;
 
 import cn.refactor.lib.colordialog.PromptDialog;
 
@@ -21,7 +22,9 @@ public class AddObjectActivity extends AppCompatActivity {
     public EditText teacher;
     public Button btn_send;
     public DBObjectHelper dbSQL;
+    public DBGradeHelper dbSQL2;
     public SQLiteDatabase sqLiteDatabase;
+    public SQLiteDatabase sqLiteDatabase2;
 
 
     @Override
@@ -58,10 +61,15 @@ public class AddObjectActivity extends AppCompatActivity {
             } else {
 
                 dbSQL = new DBObjectHelper(getApplicationContext());
+                dbSQL2 = new DBGradeHelper(getApplicationContext());
                 sqLiteDatabase = dbSQL.getWritableDatabase();
+                sqLiteDatabase2 = dbSQL2.getWritableDatabase();
                 dbSQL.addInfo(object_v, teacher_v, sqLiteDatabase);
-                Toast.makeText(getApplicationContext(), "Предмет и преподаватель добавлены", Toast.LENGTH_LONG).show();
+                dbSQL2.addInfo(object_v, "0", "0", sqLiteDatabase2);
+                TastyToast.makeText(getApplicationContext(), "Предмет и преподаватель добавлены", TastyToast.LENGTH_LONG,
+                        TastyToast.SUCCESS);
                 dbSQL.close();
+                dbSQL2.close();
 
 
                 Intent intent = new Intent();

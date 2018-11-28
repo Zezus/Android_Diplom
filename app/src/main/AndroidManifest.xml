@@ -53,6 +53,15 @@
                 android:value=".schedule.ScheduleActivity" />
         </activity>
         <activity
+            android:name=".grade.GradeActivity"
+            android:label="@string/title_activity_grade"
+            android:theme="@style/BlackTheme"
+            android:windowSoftInputMode="stateHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".schedule.ScheduleActivity" />
+        </activity>
+        <activity
             android:name=".notes.NoteActivity"
             android:label="@string/title_activity_note"
             android:theme="@style/BlackTheme">

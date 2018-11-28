@@ -15,6 +15,9 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.azia.diplom.R;
+import com.example.azia.diplom.WebSite.WikipediaActivity;
+import com.example.azia.diplom.WebSite.WolframActivity;
+import com.example.azia.diplom.grade.GradeActivity;
 import com.example.azia.diplom.helpers.Item;
 import com.example.azia.diplom.homeWork.HomeWorkActivity;
 import com.example.azia.diplom.mainMenu.HomeFragment;
@@ -99,11 +102,25 @@ public class ObjectActivity extends AppCompatActivity implements ListFragment.Ca
                 startActivity(i);
                 break;
 
+            case R.id.item_grade:
+                i = new Intent(ObjectActivity.this, GradeActivity.class);
+                startActivity(i);
+                break;
+
             case R.id.item_note:
                 i = new Intent(ObjectActivity.this, NoteActivity.class);
                 startActivity(i);
                 break;
 
+            case R.id.item_wikipedia:
+                i = new Intent(ObjectActivity.this, WikipediaActivity.class);
+                startActivity(i);
+                break;
+
+            case R.id.item_walfram:
+                i = new Intent(ObjectActivity.this, WolframActivity.class);
+                startActivity(i);
+                break;
             default:
                 fragmentClass = HomeFragment.class;
         }
@@ -134,9 +151,21 @@ public class ObjectActivity extends AppCompatActivity implements ListFragment.Ca
             Intent intent = new Intent();
             intent.setClass(ObjectActivity.this, HomeWorkActivity.class);
             startActivity(intent);
+        } else if (item.getTitle() == "Оценки") {
+            Intent intent = new Intent();
+            intent.setClass(ObjectActivity.this, GradeActivity.class);
+            startActivity(intent);
         } else if (item.getTitle() == "Записи") {
             Intent intent = new Intent();
             intent.setClass(ObjectActivity.this, NoteActivity.class);
+            startActivity(intent);
+        } else if (item.getTitle() == "Wolfram Alpha") {
+            Intent intent = new Intent();
+            intent.setClass(ObjectActivity.this, WolframActivity.class);
+            startActivity(intent);
+        } else if (item.getTitle() == "Wikipedia") {
+            Intent intent = new Intent();
+            intent.setClass(ObjectActivity.this, WikipediaActivity.class);
             startActivity(intent);
         }
         transaction.commit();

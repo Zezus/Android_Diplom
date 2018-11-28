@@ -23,7 +23,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.example.azia.diplom.R;
 import com.example.azia.diplom.dataBase.DBHomeWorkHelper;
@@ -231,7 +230,6 @@ public class AddHomeWorkActivity extends AppCompatActivity implements DatePicker
                 sqLiteDatabase = dbSQL.getWritableDatabase();
                 dbSQL.addInfo(object_v, task_v, date_v, teacher_v, image_v, date_sort_v, sqLiteDatabase);
                 //dbSQL.addInfo(object_v, task_v, date_v, teacher_v, sqLiteDatabase);
-                Toast.makeText(getApplicationContext(), "Домашнее задание добавлено ", Toast.LENGTH_LONG).show();
                 TastyToast.makeText(getApplicationContext(), "Домашнее задание добавлено ", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
                 dbSQL.close();
 

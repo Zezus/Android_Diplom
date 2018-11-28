@@ -22,6 +22,7 @@ import android.view.View;
 import com.example.azia.diplom.R;
 import com.example.azia.diplom.WebSite.WikipediaActivity;
 import com.example.azia.diplom.WebSite.WolframActivity;
+import com.example.azia.diplom.grade.GradeActivity;
 import com.example.azia.diplom.helpers.Item;
 import com.example.azia.diplom.homeWork.HomeWorkActivity;
 import com.example.azia.diplom.mainMenu.HomeFragment;
@@ -127,6 +128,11 @@ public class ScheduleActivity extends AppCompatActivity implements ListFragment.
                 startActivity(i);
                 break;
 
+            case R.id.item_grade:
+                i = new Intent(ScheduleActivity.this, GradeActivity.class);
+                startActivity(i);
+                break;
+
             case R.id.item_note:
                 i = new Intent(ScheduleActivity.this, NoteActivity.class);
                 startActivity(i);
@@ -171,6 +177,10 @@ public class ScheduleActivity extends AppCompatActivity implements ListFragment.
         } else if (item.getTitle() == "Домашнее задание") {
             Intent intent = new Intent();
             intent.setClass(ScheduleActivity.this, HomeWorkActivity.class);
+            startActivity(intent);
+        } else if (item.getTitle() == "Оценки") {
+            Intent intent = new Intent();
+            intent.setClass(ScheduleActivity.this, GradeActivity.class);
             startActivity(intent);
         } else if (item.getTitle() == "Записи") {
             Intent intent = new Intent();

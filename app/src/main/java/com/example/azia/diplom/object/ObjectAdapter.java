@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.azia.diplom.R;
+import com.example.azia.diplom.dataBase.DBGradeHelper;
 import com.example.azia.diplom.dataBase.DBObjectHelper;
 import com.sdsmdg.tastytoast.TastyToast;
 
@@ -24,7 +25,9 @@ public class ObjectAdapter extends RecyclerView.Adapter<ObjectAdapter.ViewHolder
     private final Context context;
     private final List<ObjectList> objectLists;
     public DBObjectHelper dbSQL;
+    public DBGradeHelper dbSQL2;
     public SQLiteDatabase sqLiteDatabase;
+    public SQLiteDatabase sqLiteDatabase2;
     private ObjectActivity mainActivity;
     private Dialog dialog;
 
@@ -52,6 +55,8 @@ public class ObjectAdapter extends RecyclerView.Adapter<ObjectAdapter.ViewHolder
 
         dbSQL = new DBObjectHelper(context);
         sqLiteDatabase = dbSQL.getWritableDatabase();
+        dbSQL2 = new DBGradeHelper(context);
+        sqLiteDatabase2 = dbSQL2.getWritableDatabase();
 
         final ObjectList objectList = objectLists.get(position);
         holder.objectTV.setText(objectList.getObject());
@@ -67,9 +72,11 @@ public class ObjectAdapter extends RecyclerView.Adapter<ObjectAdapter.ViewHolder
                     @Override
                     public void onClick(ColorDialog dialog) {
                         dbSQL.deleteInfo(String.valueOf(objectList.getId()), sqLiteDatabase);
+                        dbSQL2.deleteInfo(String.valueOf(objectList.getId()), sqLiteDatabase2);
+                        dbSQL.close();
+                        dbSQL2.close();
                         TastyToast.makeText(context, "Предмет удален  !", TastyToast.LENGTH_LONG,
                                 TastyToast.INFO);
-                        dbSQL.close();
                         dialog.cancel();
                         Intent intent = new Intent(context, ObjectActivity.class);
                         context.startActivity(intent);

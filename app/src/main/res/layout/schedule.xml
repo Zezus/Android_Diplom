@@ -49,9 +49,20 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:fontFamily="@font/rus2"
-                android:text="object"
+                android:text="Schedule"
                 android:textColor="@color/white"
                 android:textSize="@dimen/title_text_size"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/sc_teacher"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/rus2"
+                android:padding="5dp"
+                android:text="teacher"
+                android:textColor="@color/text_blueDark"
+                android:textSize="@dimen/text_text_size"
                 android:textStyle="bold" />
 
             <TextView
@@ -83,17 +94,6 @@
                 android:fontFamily="@font/rus2"
                 android:padding="5dp"
                 android:text="time_end"
-                android:textColor="@color/text_blueDark"
-                android:textSize="@dimen/text_text_size"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/sc_teacher"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/rus2"
-                android:padding="5dp"
-                android:text="teacher"
                 android:textColor="@color/text_blueDark"
                 android:textSize="@dimen/text_text_size"
                 android:textStyle="bold" />

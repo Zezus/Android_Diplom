@@ -26,6 +26,9 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.example.azia.diplom.R;
+import com.example.azia.diplom.WebSite.WikipediaActivity;
+import com.example.azia.diplom.WebSite.WolframActivity;
+import com.example.azia.diplom.grade.GradeActivity;
 import com.example.azia.diplom.helpers.Item;
 import com.example.azia.diplom.homeWork.HomeWorkActivity;
 import com.example.azia.diplom.mainMenu.HomeFragment;
@@ -161,12 +164,25 @@ public class TimerActivity extends AppCompatActivity implements ListFragment.Cal
                 startActivity(i);
                 break;
 
+            case R.id.item_grade:
+                i = new Intent(TimerActivity.this, GradeActivity.class);
+                startActivity(i);
+                break;
+
             case R.id.item_note:
                 i = new Intent(TimerActivity.this, NoteActivity.class);
                 startActivity(i);
                 break;
 
+            case R.id.item_wikipedia:
+                i = new Intent(TimerActivity.this, WikipediaActivity.class);
+                startActivity(i);
+                break;
 
+            case R.id.item_walfram:
+                i = new Intent(TimerActivity.this, WolframActivity.class);
+                startActivity(i);
+                break;
             default:
                 fragmentClass = HomeFragment.class;
         }
@@ -197,9 +213,21 @@ public class TimerActivity extends AppCompatActivity implements ListFragment.Cal
             Intent intent = new Intent();
             intent.setClass(TimerActivity.this, HomeWorkActivity.class);
             startActivity(intent);
+        } else if (item.getTitle() == "Оценки") {
+            Intent intent = new Intent();
+            intent.setClass(TimerActivity.this, GradeActivity.class);
+            startActivity(intent);
         } else if (item.getTitle() == "Записи") {
             Intent intent = new Intent();
             intent.setClass(TimerActivity.this, NoteActivity.class);
+            startActivity(intent);
+        } else if (item.getTitle() == "Wolfram Alpha") {
+            Intent intent = new Intent();
+            intent.setClass(TimerActivity.this, WolframActivity.class);
+            startActivity(intent);
+        } else if (item.getTitle() == "Wikipedia") {
+            Intent intent = new Intent();
+            intent.setClass(TimerActivity.this, WikipediaActivity.class);
             startActivity(intent);
         }
         transaction.commit();

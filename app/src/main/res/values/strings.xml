@@ -17,6 +17,7 @@
     <string name="title_activity_object">ObjectActivity</string>
     <string name="title_activity_object2">Object2Activity</string>
     <string name="title_activity_home_work">HomeWorkActivity</string>
+    <string name="title_activity_grade">GradeActivity</string>
     <string name="title_activity_note">NoteActivity</string>
     <string name="about">about</string>
     <string name="settings">settings</string>

@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.azia.diplom.R;
+import com.example.azia.diplom.dataBase.DBGradeHelper;
 import com.example.azia.diplom.dataBase.DBObjectHelper;
 import com.sdsmdg.tastytoast.TastyToast;
 
@@ -25,7 +26,9 @@ public class AddObjectSheet extends BottomSheetDialogFragment {
     public EditText object;
     public EditText teacher;
     public DBObjectHelper dbSQL;
+    public DBGradeHelper dbSQL2;
     public SQLiteDatabase sqLiteDatabase;
+    public SQLiteDatabase sqLiteDatabase2;
     private Button btn_send;
     private FloatingActionButton fab_send1;
     private FloatingActionButton fab_send2;
@@ -83,11 +86,15 @@ public class AddObjectSheet extends BottomSheetDialogFragment {
         } else {
 
             dbSQL = new DBObjectHelper(getContext());
+            dbSQL2 = new DBGradeHelper(getContext());
             sqLiteDatabase = dbSQL.getWritableDatabase();
+            sqLiteDatabase2 = dbSQL2.getWritableDatabase();
             dbSQL.addInfo(object_v, teacher_v, sqLiteDatabase);
-            TastyToast.makeText(getContext(), "Добавлено  !", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
+            dbSQL2.addInfo(object_v, "", "", sqLiteDatabase2);
             dbSQL.close();
-
+            dbSQL2.close();
+            TastyToast.makeText(getContext(), "Добавлено", TastyToast.LENGTH_LONG,
+                    TastyToast.SUCCESS);
 
             Intent intent = new Intent(getContext(), ObjectActivity.class);
             getActivity().startActivity(intent);
