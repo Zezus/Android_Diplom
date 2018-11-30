@@ -10,6 +10,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -24,6 +25,8 @@ import com.example.azia.diplom.notes.NoteActivity;
 import com.example.azia.diplom.object.ObjectActivity;
 import com.example.azia.diplom.schedule.ScheduleActivity;
 import com.example.azia.diplom.timer.TimerActivity;
+
+import cn.refactor.lib.colordialog.PromptDialog;
 
 public class GradeActivity extends AppCompatActivity implements ListFragment.Callback, NavigationView.OnNavigationItemSelectedListener {
 
@@ -163,14 +166,33 @@ public class GradeActivity extends AppCompatActivity implements ListFragment.Cal
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        switch (item.getItemId()) {
+            case R.id.item_grade_info:
+                new PromptDialog(this)
+                        .setDialogType(PromptDialog.DIALOG_TYPE_INFO)
+                        .setAnimationEnable(true)
+                        .setTitleText("")
+                        .setContentText("Необходимо добавить предметы")
+                        .setPositiveListener("OK", new PromptDialog.OnPositiveListener() {
+                            @Override
+                            public void onClick(PromptDialog dialog) {
+                                dialog.dismiss();
+                            }
+                        }).show();
+                return true;
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.home) {
-            this.finish();
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
+    }
 
-        return super.onOptionsItemSelected(item);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_grade, menu);
+        return true;
     }
 
     @Override

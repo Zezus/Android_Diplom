@@ -1,46 +1,57 @@
 package com.example.azia.diplom.homeWork;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
+import android.content.ContentResolver;
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Switch;
+import android.widget.TimePicker;
 
 import com.example.azia.diplom.R;
 import com.example.azia.diplom.dataBase.DBHomeWorkHelper;
 import com.example.azia.diplom.dataBase.DBObjectHelper;
 import com.example.azia.diplom.object.ObjectList;
+import com.example.azia.diplom.schedule.TimePickerFragment;
 import com.sdsmdg.tastytoast.TastyToast;
-import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 import cn.refactor.lib.colordialog.PromptDialog;
 
-public class AddHomeWorkActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+public class AddHomeWorkActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
 
     public DBHomeWorkHelper dbSQL;
     public DBObjectHelper dbSQL2;
@@ -50,8 +61,13 @@ public class AddHomeWorkActivity extends AppCompatActivity implements DatePicker
     public int teacherPos;
     public Button btn_send;
     public Button datePicker;
+    public Button dateReminder;
+    public FloatingActionButton timeReminder;
+    public FloatingActionButton keyboard;
+    public Switch reminderSwitch;
     private final int Pick_imageNo = 0;
     public EditText task;
+    public EditText time_view;
     Cursor cursor;
     String[] objects;
     private ArrayList<ObjectList> objectLists;
@@ -59,11 +75,22 @@ public class AddHomeWorkActivity extends AppCompatActivity implements DatePicker
     private final int Pick_image = 1;
     public String date = "";
     public String date_sort = "";
-    private ImageView imageView;
-    private Bitmap selectedImage;
-    private FloatingActionButton imageSelect;
+    public String dateReminderText = "";
+    public String hour;
+    public String minute;
+    public int year;
+    public int month;
+    public int day;
+    public Boolean flag1 = false;
+    public Boolean flagDate = false;
+    public Boolean flagDateReminder = false;
+    public Date time;
+    // private FloatingActionButton imageSelect;
     String temp;
-    private FloatingActionButton deleteImage;
+    private Boolean flagEnd = false;
+    // private ImageView imageView;
+    private Bitmap selectedImage;
+    //private FloatingActionButton deleteImage;
     private Uri imageUri;
 
     private static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
@@ -113,9 +140,15 @@ public class AddHomeWorkActivity extends AppCompatActivity implements DatePicker
         objectSpinner = findViewById(R.id.hwadd_object_sp);
         btn_send = findViewById(R.id.hwadd_btn_send);
         task = findViewById(R.id.hwadd_task);
-        imageSelect = findViewById(R.id.hwadd_fab_image);
-        imageView = findViewById(R.id.imageView);
-        deleteImage = findViewById(R.id.fab_hw_delimage);
+        reminderSwitch = findViewById(R.id.hwadd_switch);
+        dateReminder = findViewById(R.id.hwadd_dateRem_bt);
+        time_view = findViewById(R.id.et_hw_timeview);
+        timeReminder = findViewById(R.id.fab_hw_timeadd);
+        keyboard = findViewById(R.id.hwadd_fab_keyboard);
+
+        //imageSelect = findViewById(R.id.hwadd_fab_image);
+        //imageView = findViewById(R.id.imageView);
+        //deleteImage = findViewById(R.id.fab_hw_delimage);
 
 
         Toolbar toolbar = findViewById(R.id.toolbar_add_hw);
@@ -123,8 +156,51 @@ public class AddHomeWorkActivity extends AppCompatActivity implements DatePicker
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        dateReminder.setVisibility(Button.INVISIBLE);
+        timeReminder.setVisibility(Button.INVISIBLE);
+        time_view.setVisibility(Button.INVISIBLE);
+        dateReminderText = null;
+        time = null;
 
-        imageSelect.setOnClickListener(new View.OnClickListener() {
+        timeReminder.setOnClickListener(view -> {
+            flag1 = false;
+            DialogFragment timePicker = new TimePickerFragment();
+            timePicker.show(getSupportFragmentManager(), " time picker");
+            flag1 = true;
+        });
+
+        dateReminder.setOnClickListener(view -> {
+            flagDateReminder = true;
+            DialogFragment datePickerFragment = new DatePickerFragment();
+            datePickerFragment.show(getSupportFragmentManager(), "date picker");
+        });
+
+        reminderSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    dateReminder.setVisibility(Button.VISIBLE);
+                    timeReminder.setVisibility(Button.VISIBLE);
+                    time_view.setVisibility(Button.VISIBLE);
+                } else {
+                    dateReminder.setVisibility(Button.INVISIBLE);
+                    timeReminder.setVisibility(Button.INVISIBLE);
+                    time_view.setVisibility(Button.INVISIBLE);
+                    dateReminder.setText("Выберите дату");
+                    time_view.setText(null);
+
+                }
+            }
+        });
+
+        keyboard.setOnClickListener(view -> {
+            InputMethodManager imm = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        });
+
+
+        /*imageSelect.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
@@ -144,10 +220,11 @@ public class AddHomeWorkActivity extends AppCompatActivity implements DatePicker
             temp = "-";
             deleteImage.setVisibility(Button.INVISIBLE);
             imageUri = null;
-        });
+        });*/
 
 
         datePicker.setOnClickListener(view -> {
+            flagDate = true;
             DialogFragment datePickerFragment = new DatePickerFragment();
             datePickerFragment.show(getSupportFragmentManager(), "date picker");
         });
@@ -203,6 +280,7 @@ public class AddHomeWorkActivity extends AppCompatActivity implements DatePicker
 
 
         btn_send.setOnClickListener(view -> {
+            flagEnd = false;
             String object_v = object;
             String task_v = task.getText().toString();
             String date_v = date.toString();
@@ -226,17 +304,105 @@ public class AddHomeWorkActivity extends AppCompatActivity implements DatePicker
                             }
                         }).show();
             } else {
-                dbSQL = new DBHomeWorkHelper(getApplicationContext());
-                sqLiteDatabase = dbSQL.getWritableDatabase();
-                dbSQL.addInfo(object_v, task_v, date_v, teacher_v, image_v, date_sort_v, sqLiteDatabase);
-                //dbSQL.addInfo(object_v, task_v, date_v, teacher_v, sqLiteDatabase);
-                TastyToast.makeText(getApplicationContext(), "Домашнее задание добавлено ", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
-                dbSQL.close();
+
+                if (reminderSwitch.isChecked()) {
+
+                    int text_timeView = time_view.length();
+                    String text_dateReminder = dateReminder.getText().toString();
+
+                    if (text_timeView != 0 && text_dateReminder != "Выберите дату") {
+                        Calendar cal = Calendar.getInstance();
+                        cal.set(Calendar.HOUR_OF_DAY, Integer.valueOf(hour));
+                        cal.set(Calendar.MINUTE, Integer.valueOf(minute));
+                        cal.set(Calendar.YEAR, year);
+                        cal.set(Calendar.MONTH, month);
+                        cal.set(Calendar.DAY_OF_MONTH, day);
+                        time = cal.getTime();
+
+                        ContentResolver cr = getApplicationContext().getContentResolver();
+                        ContentValues calEvent = new ContentValues();
+                        calEvent.put(CalendarContract.Events.CALENDAR_ID, 1); // XXX pick)
+                        calEvent.put(CalendarContract.Events.TITLE, "Расписание! Домашнее задание");
+                        calEvent.put(CalendarContract.Events.DESCRIPTION, task_v);
+                        calEvent.put(CalendarContract.Events.DTSTART, time.getTime());
+                        calEvent.put(CalendarContract.Events.DTEND, time.getTime() + (60 * 60 * 1000));
+                        calEvent.put(CalendarContract.Events.HAS_ALARM, 1);
+                        calEvent.put(CalendarContract.Events.EVENT_TIMEZONE, CalendarContract.Calendars.CALENDAR_TIME_ZONE);
+
+//save an event
+                        @SuppressLint("MissingPermission") final Uri uri = cr.insert(CalendarContract.Events.CONTENT_URI, calEvent);
+
+                        int dbId = Integer.parseInt(uri.getLastPathSegment());
+
+//Now create a reminder and attach to the reminder
+                        ContentValues reminders = new ContentValues();
+                        reminders.put(CalendarContract.Reminders.EVENT_ID, dbId);
+                        reminders.put(CalendarContract.Reminders.METHOD, CalendarContract.Reminders.METHOD_ALERT);
+                        reminders.put(CalendarContract.Reminders.MINUTES, 0);
+
+                        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_CALENDAR) != PackageManager.PERMISSION_GRANTED) {
+                            return;
+                        }
+                        final Uri reminder = cr.insert(CalendarContract.Reminders.CONTENT_URI, reminders);
+
+                        int added = Integer.parseInt(reminder.getLastPathSegment());
+
+//this means reminder is added
+                        if (added > 0) {
+                            Intent vieww = new Intent(Intent.ACTION_VIEW);
+                            vieww.setData(uri); // enter the uri of the event not the reminder
+
+                            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT_WATCH) {
+                                vieww.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                                        | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP
+                                        | Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+                            } else {
+                                vieww.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
+                                        Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                                        Intent.FLAG_ACTIVITY_NO_HISTORY |
+                                        Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+                            }
+
+                        }
+
+                        dbSQL = new DBHomeWorkHelper(getApplicationContext());
+                        sqLiteDatabase = dbSQL.getWritableDatabase();
+                        dbSQL.addInfo(object_v, task_v, date_v, teacher_v, image_v, date_sort_v, sqLiteDatabase);
+                        //dbSQL.addInfo(object_v, task_v, date_v, teacher_v, sqLiteDatabase);
+                        TastyToast.makeText(getApplicationContext(), "Домашнее задание добавлено ", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
+                        dbSQL.close();
 
 
-                Intent intent = new Intent();
-                intent.setClass(AddHomeWorkActivity.this, HomeWorkActivity.class);
-                startActivity(intent);
+                        Intent intent = new Intent();
+                        intent.setClass(AddHomeWorkActivity.this, HomeWorkActivity.class);
+                        startActivity(intent);
+                    } else {
+                        new PromptDialog(this)
+                                .setDialogType(PromptDialog.DIALOG_TYPE_WARNING)
+                                .setAnimationEnable(true)
+                                .setTitleText("")
+                                .setContentText("Заполните дату и время для напоминания")
+                                .setPositiveListener("OK", new PromptDialog.OnPositiveListener() {
+                                    @Override
+                                    public void onClick(PromptDialog dialog) {
+                                        dialog.dismiss();
+                                    }
+                                }).show();
+                    }
+
+                } else {
+                    dbSQL = new DBHomeWorkHelper(getApplicationContext());
+                    sqLiteDatabase = dbSQL.getWritableDatabase();
+                    dbSQL.addInfo(object_v, task_v, date_v, teacher_v, image_v, date_sort_v, sqLiteDatabase);
+                    //dbSQL.addInfo(object_v, task_v, date_v, teacher_v, sqLiteDatabase);
+                    TastyToast.makeText(getApplicationContext(), "Домашнее задание добавлено ", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
+                    dbSQL.close();
+
+
+                    Intent intent = new Intent();
+                    intent.setClass(AddHomeWorkActivity.this, HomeWorkActivity.class);
+                    startActivity(intent);
+                }
             }
 
         });
@@ -244,7 +410,7 @@ public class AddHomeWorkActivity extends AppCompatActivity implements DatePicker
     }
 
     //Обрабатываем результат выбора в галерее:
-    @Override
+    /*@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
         super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
 
@@ -276,7 +442,7 @@ public class AddHomeWorkActivity extends AppCompatActivity implements DatePicker
         }
     }
 
-    public Bitmap getResizedBitmap(Bitmap bm, int newHeight, int newWidth) {
+    public Bitmap getResizedBitmap(Bitmap bm, int newHeight, int newWidth) {  // это не нужно
         int width = bm.getWidth();
         int height = bm.getHeight();
         float scaleWidth = ((float) newWidth) / width;
@@ -293,19 +459,59 @@ public class AddHomeWorkActivity extends AppCompatActivity implements DatePicker
 
         return resizedBitmap;
     }
+*/
+    @Override
+    public void onTimeSet(TimePicker timePicker, int i, int i1) {
+        hour = "";
+        minute = "";
+        if (i < 10) {
+            hour = "0" + String.valueOf(i);
+        } else hour = String.valueOf(i);
+        if (i1 < 10) {
+            minute = "0" + String.valueOf(i1);
+        } else minute = String.valueOf(i1);
+
+        if (flag1 == true) {
+            time_view.setText(hour + ":" + minute);
+        }
+
+        flag1 = false;
+    }
 
 
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-        Calendar c = Calendar.getInstance();
-        c.set(Calendar.YEAR, year);
-        c.set(Calendar.MONTH, month);
-        c.set(Calendar.DAY_OF_MONTH, day);
-        date_sort = year + "" + month + "" + day;
-        date = String.format("%1$tA", c) + " - " + DateFormat.getDateInstance().format(c.getTime());
-        String butText = String.format("%1$tA", c) + System.getProperty("line.separator") + DateFormat.getDateInstance().format(c.getTime());
-        Button btn = findViewById(R.id.hwadd_date_bt);
-        btn.setText(butText);
+        if (flagDate) {
+            Calendar c = Calendar.getInstance();
+            c.set(Calendar.YEAR, year);
+            c.set(Calendar.MONTH, month);
+            c.set(Calendar.DAY_OF_MONTH, day);
+            if (day < 10) {
+                String dayZ = "0" + day;
+                date_sort = year + "" + month + "" + dayZ;
+            } else date_sort = year + "" + month + "" + day;
+
+            date = String.format("%1$tA", c) + " - " + DateFormat.getDateInstance().format(c.getTime());
+            String butText = String.format("%1$tA", c) + System.getProperty("line.separator") + DateFormat.getDateInstance().format(c.getTime());
+            Button btn = findViewById(R.id.hwadd_date_bt);
+            btn.setText(butText);
+            flagDate = false;
+        }
+        if (flagDateReminder) {
+            Calendar c = Calendar.getInstance();
+            this.year = year;
+            this.month = month;
+            this.day = day;
+            c.set(Calendar.YEAR, year);
+            c.set(Calendar.MONTH, month);
+            c.set(Calendar.DAY_OF_MONTH, day);
+            dateReminderText = String.format("%1$tA", c) + " - " + DateFormat.getDateInstance().format(c.getTime());
+            String butText = String.format("%1$tA", c) + System.getProperty("line.separator") + DateFormat.getDateInstance().format(c.getTime());
+            Button btn = findViewById(R.id.hwadd_dateRem_bt);
+            btn.setText(butText);
+            flagDateReminder = false;
+        }
+
     }
 
 }

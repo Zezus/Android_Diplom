@@ -31,6 +31,7 @@
         <activity
             android:name=".timer.TimerActivity"
             android:label="@string/title_activity_timer"
+            android:screenOrientation="portrait"
             android:theme="@style/BlackTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -39,6 +40,7 @@
         <activity
             android:name=".object.ObjectActivity"
             android:label="@string/title_activity_object"
+            android:screenOrientation="portrait"
             android:theme="@style/BlackTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -47,6 +49,7 @@
         <activity
             android:name=".homeWork.HomeWorkActivity"
             android:label="@string/title_activity_home_work"
+            android:screenOrientation="portrait"
             android:theme="@style/BlackTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -56,6 +59,7 @@
             android:name=".grade.GradeActivity"
             android:label="@string/title_activity_grade"
             android:theme="@style/BlackTheme"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -64,6 +68,7 @@
         <activity
             android:name=".notes.NoteActivity"
             android:label="@string/title_activity_note"
+            android:screenOrientation="portrait"
             android:theme="@style/BlackTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -71,6 +76,7 @@
         </activity>
         <activity
             android:name=".homeWork.AddHomeWorkActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/BlackTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -78,6 +84,7 @@
         </activity>
         <activity
             android:name=".notes.AddNoteActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/BlackTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -85,6 +92,7 @@
         </activity>
         <activity
             android:name=".object.AddObjectActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/BlackTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -93,6 +101,7 @@
         <activity
             android:name=".schedule.AddScheduleActivity"
             android:label="@string/title_activity_add_schedule"
+            android:screenOrientation="portrait"
             android:theme="@style/BlackTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -106,9 +115,11 @@
         <activity android:name=".homeWork.HomeWorkImageActivity" />
         <activity
             android:name=".WebSite.WolframActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/BlackTheme" />
         <activity
             android:name=".WebSite.WikipediaActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/BlackTheme" />
     </application>
 

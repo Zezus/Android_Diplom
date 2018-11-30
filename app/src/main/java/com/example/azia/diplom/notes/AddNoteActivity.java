@@ -114,6 +114,8 @@ public class AddNoteActivity extends AppCompatActivity implements TimePickerDial
                     datePicker.setVisibility(Button.INVISIBLE);
                     time_add.setVisibility(Button.INVISIBLE);
                     time_view.setVisibility(Button.INVISIBLE);
+                    datePicker.setText("Выберите дату");
+                    time_view.setText(null);
                 }
             }
         });
@@ -141,99 +143,106 @@ public class AddNoteActivity extends AppCompatActivity implements TimePickerDial
                         }).show();
             } else {
 
-                dbSQL = new DBNotesHelper(getApplicationContext());
-                sqLiteDatabase = dbSQL.getWritableDatabase();
-                dbSQL.addInfo(note_v, title_v, sqLiteDatabase);
-                TastyToast.makeText(getApplicationContext(), "Добавлено  !", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
-                dbSQL.close();
-
                 if (reminder.isChecked()) {
 
-                    Calendar cal = Calendar.getInstance();
-                    cal.set(Calendar.HOUR_OF_DAY, Integer.valueOf(hour));
-                    cal.set(Calendar.MINUTE, Integer.valueOf(minute));
-                    cal.set(Calendar.YEAR, year);
-                    cal.set(Calendar.MONTH, month);
-                    cal.set(Calendar.DAY_OF_MONTH, day);
-                    time = cal.getTime();
+                    int text_timeView = time_view.length();
+                    String text_dateReminder = datePicker.getText().toString();
+                    if (text_timeView != 0 && text_dateReminder != "Выберите дату") {
+                        Calendar cal = Calendar.getInstance();
+                        cal.set(Calendar.HOUR_OF_DAY, Integer.valueOf(hour));
+                        cal.set(Calendar.MINUTE, Integer.valueOf(minute));
+                        cal.set(Calendar.YEAR, year);
+                        cal.set(Calendar.MONTH, month);
+                        cal.set(Calendar.DAY_OF_MONTH, day);
+                        time = cal.getTime();
 
-                    ContentResolver cr = getApplicationContext().getContentResolver();
-                    ContentValues calEvent = new ContentValues();
-                    calEvent.put(CalendarContract.Events.CALENDAR_ID, 1); // XXX pick)
-                    calEvent.put(CalendarContract.Events.TITLE, "Diary !");
-                    calEvent.put(CalendarContract.Events.DESCRIPTION, title_v + ". " + note_v);
-                    calEvent.put(CalendarContract.Events.DTSTART, time.getTime());
-                    calEvent.put(CalendarContract.Events.DTEND, time.getTime() + (60 * 60 * 1000));
-                    calEvent.put(CalendarContract.Events.HAS_ALARM, 1);
-                    calEvent.put(CalendarContract.Events.EVENT_TIMEZONE, CalendarContract.Calendars.CALENDAR_TIME_ZONE);
+                        ContentResolver cr = getApplicationContext().getContentResolver();
+                        ContentValues calEvent = new ContentValues();
+                        calEvent.put(CalendarContract.Events.CALENDAR_ID, 1); // XXX pick)
+                        calEvent.put(CalendarContract.Events.TITLE, "Расписание! Запись");
+                        calEvent.put(CalendarContract.Events.DESCRIPTION, title_v + ". " + note_v);
+                        calEvent.put(CalendarContract.Events.DTSTART, time.getTime());
+                        calEvent.put(CalendarContract.Events.DTEND, time.getTime() + (60 * 60 * 1000));
+                        calEvent.put(CalendarContract.Events.HAS_ALARM, 1);
+                        calEvent.put(CalendarContract.Events.EVENT_TIMEZONE, CalendarContract.Calendars.CALENDAR_TIME_ZONE);
 
 //save an event
-                    @SuppressLint("MissingPermission") final Uri uri = cr.insert(CalendarContract.Events.CONTENT_URI, calEvent);
+                        @SuppressLint("MissingPermission") final Uri uri = cr.insert(CalendarContract.Events.CONTENT_URI, calEvent);
 
-                    int dbId = Integer.parseInt(uri.getLastPathSegment());
+                        int dbId = Integer.parseInt(uri.getLastPathSegment());
 
 //Now create a reminder and attach to the reminder
-                    ContentValues reminders = new ContentValues();
-                    reminders.put(CalendarContract.Reminders.EVENT_ID, dbId);
-                    reminders.put(CalendarContract.Reminders.METHOD, CalendarContract.Reminders.METHOD_ALERT);
-                    reminders.put(CalendarContract.Reminders.MINUTES, 0);
+                        ContentValues reminders = new ContentValues();
+                        reminders.put(CalendarContract.Reminders.EVENT_ID, dbId);
+                        reminders.put(CalendarContract.Reminders.METHOD, CalendarContract.Reminders.METHOD_ALERT);
+                        reminders.put(CalendarContract.Reminders.MINUTES, 0);
 
-                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_CALENDAR) != PackageManager.PERMISSION_GRANTED) {
-                        // TODO: Consider calling
-                        //    ActivityCompat#requestPermissions
-                        // here to request the missing permissions, and then overriding
-                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                        //                                          int[] grantResults)
-                        // to handle the case where the user grants the permission. See the documentation
-                        // for ActivityCompat#requestPermissions for more details.
-                        return;
-                    }
-                    final Uri reminder = cr.insert(CalendarContract.Reminders.CONTENT_URI, reminders);
+                        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_CALENDAR) != PackageManager.PERMISSION_GRANTED) {
+                            // TODO: Consider calling
+                            //    ActivityCompat#requestPermissions
+                            // here to request the missing permissions, and then overriding
+                            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                            //                                          int[] grantResults)
+                            // to handle the case where the user grants the permission. See the documentation
+                            // for ActivityCompat#requestPermissions for more details.
+                            return;
+                        }
+                        final Uri reminder = cr.insert(CalendarContract.Reminders.CONTENT_URI, reminders);
 
-                    int added = Integer.parseInt(reminder.getLastPathSegment());
+                        int added = Integer.parseInt(reminder.getLastPathSegment());
 
 //this means reminder is added
-                    if (added > 0) {
-                        Intent vieww = new Intent(Intent.ACTION_VIEW);
-                        vieww.setData(uri); // enter the uri of the event not the reminder
+                        if (added > 0) {
+                            Intent vieww = new Intent(Intent.ACTION_VIEW);
+                            vieww.setData(uri); // enter the uri of the event not the reminder
 
-                        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT_WATCH) {
-                            vieww.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                                    | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP
-                                    | Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
-                        } else {
-                            vieww.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
-                                    Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP |
-                                    Intent.FLAG_ACTIVITY_NO_HISTORY |
-                                    Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+                            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT_WATCH) {
+                                vieww.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                                        | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP
+                                        | Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+                            } else {
+                                vieww.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
+                                        Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                                        Intent.FLAG_ACTIVITY_NO_HISTORY |
+                                        Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+                            }
+
                         }
 
+                        dbSQL = new DBNotesHelper(getApplicationContext());
+                        sqLiteDatabase = dbSQL.getWritableDatabase();
+                        dbSQL.addInfo(note_v, title_v, sqLiteDatabase);
+                        TastyToast.makeText(getApplicationContext(), "Добавлено  !", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
+                        dbSQL.close();
+
+                        Intent intent = new Intent();
+                        intent.setClass(AddNoteActivity.this, NoteActivity.class);
+                        startActivity(intent);
+                    } else {
+                        new PromptDialog(this)
+                                .setDialogType(PromptDialog.DIALOG_TYPE_WARNING)
+                                .setAnimationEnable(true)
+                                .setTitleText("")
+                                .setContentText("Заполните дату и время для напоминания")
+                                .setPositiveListener("OK", new PromptDialog.OnPositiveListener() {
+                                    @Override
+                                    public void onClick(PromptDialog dialog) {
+                                        dialog.dismiss();
+                                    }
+                                }).show();
                     }
-//                notId = (int)((new Date().getTime() / 1000L) % Integer.MAX_VALUE);
-//                Intent intent2 = new Intent();
-//                intent2.setClass(AddNoteActivity.this, AlarmReceiver.class);
-//                intent2.putExtra("notId", notId);
-//                intent2.putExtra("title", title_v);
-//                intent2.putExtra("text", note_v);
-//                PendingIntent pendingIntent = PendingIntent.getBroadcast(AddNoteActivity.this, 0, intent2, PendingIntent.FLAG_CANCEL_CURRENT);
-//                AlarmManager alarm = (AlarmManager) getSystemService(ALARM_SERVICE);
-//                int hourr = Integer.valueOf(hour);
-//                int minutee = Integer.valueOf(minute);
-//                Calendar startTime = Calendar.getInstance();
-//                startTime.set(Calendar.HOUR_OF_DAY, hourr);
-//                startTime.set(Calendar.MINUTE, minutee);
-//                startTime.set(Calendar.SECOND, 0);
-//                startTime.set(Calendar.YEAR, yearDate);
-//                startTime.set(Calendar.MONTH, monthDate);
-//                startTime.set(Calendar.DAY_OF_MONTH, dayDate);
-//                long alarmStartTime = startTime.getTimeInMillis();
-//
-//
-//                alarm.set(AlarmManager.RTC_WAKEUP, alarmStartTime, pendingIntent);
+
+                } else {
+                    dbSQL = new DBNotesHelper(getApplicationContext());
+                    sqLiteDatabase = dbSQL.getWritableDatabase();
+                    dbSQL.addInfo(note_v, title_v, sqLiteDatabase);
+                    TastyToast.makeText(getApplicationContext(), "Добавлено  !", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
+                    dbSQL.close();
+
+                    Intent intent = new Intent();
+                    intent.setClass(AddNoteActivity.this, NoteActivity.class);
+                    startActivity(intent);
                 }
-                Intent intent = new Intent();
-                intent.setClass(AddNoteActivity.this, NoteActivity.class);
-                startActivity(intent);
             }
         });
     }

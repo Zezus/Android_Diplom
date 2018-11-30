@@ -1,11 +1,12 @@
-<menu xmlns:android="//schemas.android.com/apk/res/android"
-    xmlns:app="//schemas.android.com/apk/res-auto"
-    xmlns:tools="//schemas.android.com/tools"
-    tools:context="com.resocoder.timertutorial.TimerActivity">
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.azia.diplom.timer.TimerActivity">
+
     <item
-        android:icon="@drawable/ic_settings_white"
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="ifRoom" />
+        android:id="@+id/item_info"
+        android:icon="@drawable/ic_info_blue"
+        android:title="info"
+        app:showAsAction="always" />
 </menu>

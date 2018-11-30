@@ -55,31 +55,31 @@ public class ListFragment extends Fragment {
         item1.setId(UUID.randomUUID());
         item1.setTitle("Расписание");
         //item1.setPhoto(R.drawable.classroom);
-        item1.setPhoto(R.drawable.lio);
+        item1.setPhoto(R.drawable.icon);
 
         Item item2 = new Item();
         item2.setId(UUID.randomUUID());
         item2.setTitle("Таймер для выполнения \n\tдомашнего задания");
         // item2.setPhoto(R.drawable.timer);
-        item2.setPhoto(R.drawable.lio);
+        item2.setPhoto(R.drawable.icon);
 
         Item item3 = new Item();
         item3.setId(UUID.randomUUID());
         item3.setTitle("Предметы и \n\tпреподаватели");
         //item3.setPhoto(R.drawable.objects);
-        item3.setPhoto(R.drawable.lio);
+        item3.setPhoto(R.drawable.icon);
 
         Item item4 = new Item();
         item4.setId(UUID.randomUUID());
         item4.setTitle("Домашнее задание");
         //item4.setPhoto(R.drawable.homework);
-        item4.setPhoto(R.drawable.lio);
+        item4.setPhoto(R.drawable.icon);
 
         Item item5 = new Item();
         item5.setId(UUID.randomUUID());
         item5.setTitle("Записи");
         //item5.setPhoto(R.drawable.notes);
-        item5.setPhoto(R.drawable.lio);
+        item5.setPhoto(R.drawable.icon);
 
         items = new ArrayList<>();
         items.add(item1);

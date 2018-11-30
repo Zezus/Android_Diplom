@@ -204,39 +204,53 @@ public class AddScheduleSheet extends BottomSheetDialogFragment implements TimeP
 
 
         btn_send.setOnClickListener(view -> {
-            String object_v = object;
-            String room_v = room.getText().toString();
-            String timeStart_v = time_viewstart.getText().toString();
-            String timeEnd_v = time_viewend.getText().toString();
-            String time_sort_v = time_sort;
-            String dayy = day;
-            String teacher_v = objectLists.get(teacherPos).getTeacher();
+            if (objectLists.size() != 0) {
+                String object_v = object;
+                String room_v = room.getText().toString();
+                String timeStart_v = time_viewstart.getText().toString();
+                String timeEnd_v = time_viewend.getText().toString();
+                String time_sort_v = time_sort;
+                String dayy = day;
+                String teacher_v = objectLists.get(teacherPos).getTeacher();
 
-            if (object_v.length() == 0 || room_v.length() == 0 || timeStart_v.length() == 0 || timeEnd_v.length() == 0 ||
-                    time_sort_v.length() == 0 || dayy.length() == 0 || teacher_v.length() == 0) {
+                if (object_v.length() == 0 || room_v.length() == 0 || timeStart_v.length() == 0 || timeEnd_v.length() == 0 ||
+                        time_sort_v.length() == 0 || dayy.length() == 0 || teacher_v.length() == 0) {
+                    new PromptDialog(getContext())
+                            .setDialogType(PromptDialog.DIALOG_TYPE_WARNING)
+                            .setAnimationEnable(true)
+                            .setTitleText("")
+                            .setContentText("Заполните все поля")
+                            .setPositiveListener("OK", new PromptDialog.OnPositiveListener() {
+                                @Override
+                                public void onClick(PromptDialog dialog) {
+                                    dialog.dismiss();
+                                }
+                            }).show();
+
+                } else {
+
+                    dbSQL = new DBScheduleHelper(getContext());
+                    sqLiteDatabase = dbSQL.getWritableDatabase();
+                    dbSQL.addInfo(object_v, room_v, timeStart_v, timeEnd_v, time_sort_v, dayy, teacher_v, sqLiteDatabase);
+                    TastyToast.makeText(getContext(), "Предмет добавлен  !", TastyToast.LENGTH_LONG,
+                            TastyToast.SUCCESS);
+                    dbSQL.close();
+
+                    Intent intent = new Intent(getContext(), ScheduleActivity.class);
+                    getActivity().startActivity(intent);
+                }
+            } else {
                 new PromptDialog(getContext())
                         .setDialogType(PromptDialog.DIALOG_TYPE_WARNING)
                         .setAnimationEnable(true)
                         .setTitleText("")
-                        .setContentText("Заполните все поля")
+                        .setContentText("Добавьте предмет")
                         .setPositiveListener("OK", new PromptDialog.OnPositiveListener() {
                             @Override
                             public void onClick(PromptDialog dialog) {
                                 dialog.dismiss();
                             }
                         }).show();
-
-            } else {
-
-                dbSQL = new DBScheduleHelper(getContext());
-                sqLiteDatabase = dbSQL.getWritableDatabase();
-                dbSQL.addInfo(object_v, room_v, timeStart_v, timeEnd_v, time_sort_v, dayy, teacher_v, sqLiteDatabase);
-                TastyToast.makeText(getContext(), "Предмет добавлен  !", TastyToast.LENGTH_LONG,
-                        TastyToast.SUCCESS);
-                dbSQL.close();
-
-                Intent intent = new Intent(getContext(), ScheduleActivity.class);
-                getActivity().startActivity(intent);
             }
 
         });

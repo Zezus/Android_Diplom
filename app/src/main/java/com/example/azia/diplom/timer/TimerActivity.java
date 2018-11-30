@@ -40,6 +40,8 @@ import com.sdsmdg.tastytoast.TastyToast;
 
 import java.util.Locale;
 
+import cn.refactor.lib.colordialog.PromptDialog;
+
 public class TimerActivity extends AppCompatActivity implements ListFragment.Callback, NavigationView.OnNavigationItemSelectedListener {
 
     private static final long START_TIME_IN_MILLIS = 0;
@@ -57,6 +59,8 @@ public class TimerActivity extends AppCompatActivity implements ListFragment.Cal
     private boolean mTimerRunning;
     private long mTimeLeftInMillis = 0;
     private ProgressBar spinner;
+    public int valueProgress = 0;
+    public int valueMinute = 0;
 
 
     @Override
@@ -89,6 +93,7 @@ public class TimerActivity extends AppCompatActivity implements ListFragment.Cal
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                valueProgress = progress;
                 if (progress < 10) {
                     mTextViewCountDown.setText("0" + String.valueOf(progress) + ":00");
                 } else {
@@ -236,10 +241,9 @@ public class TimerActivity extends AppCompatActivity implements ListFragment.Cal
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_timer, menu);
         return true;
     }
-
 
     private void startTimer() {
         spinner.setVisibility(View.VISIBLE);
@@ -259,21 +263,13 @@ public class TimerActivity extends AppCompatActivity implements ListFragment.Cal
             public void onFinish() {
                 mTextViewCountDown.setText("00:00");
                 mTimerRunning = false;
-                // mButtonStartPause.setText("Start");
-                mButtonStartPause.setBackgroundResource(R.drawable.ic_play);
+                mButtonStartPause.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_play_black));
                 mButtonStartPause.setEnabled(false);
                 mButtonReset.setEnabled(true);
                 spinner.setVisibility(View.GONE);
                 mButtonReset.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_stop_white));
                 notification();
                 seekBar.setEnabled(true);
-                seekBar.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        seekBar.setProgress(0);
-                        seekBar.refreshDrawableState();
-                    }
-                });
             }
         }.start();
 
@@ -288,7 +284,7 @@ public class TimerActivity extends AppCompatActivity implements ListFragment.Cal
         mCountDownTimer.cancel();
         mTimerRunning = false;
         //    mButtonStartPause.setText("Start");
-        mButtonStartPause.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_play));
+        mButtonStartPause.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_play_white));
         mButtonReset.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_stop_white));
         spinner.setVisibility(View.GONE);
         mButtonReset.setEnabled(true);
@@ -298,19 +294,29 @@ public class TimerActivity extends AppCompatActivity implements ListFragment.Cal
         mTimeLeftInMillis = START_TIME_IN_MILLIS;
         updateCountDownText();
         mButtonReset.setEnabled(false);
-        mButtonStartPause.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_play));
+        mButtonStartPause.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_play_white));
         mButtonStartPause.setEnabled(true);
         spinner.setVisibility(View.GONE);
         seekBar.setEnabled(true);
+        if (valueProgress < 10) {
+            mTextViewCountDown.setText("0" + String.valueOf(valueProgress) + ":00");
+        } else {
+            mTextViewCountDown.setText(String.valueOf(valueProgress) + ":00");
+        }
+        seekBar.setMax(0);
+        seekBar.setMax(100);
+        seekBar.setProgress(valueProgress);
     }
 
     private void updateCountDownText() {
         int minutes = (int) (mTimeLeftInMillis / 1000) / 60;
         int seconds = (int) (mTimeLeftInMillis / 1000) % 60;
+        valueMinute = minutes;
 
         String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
 
         mTextViewCountDown.setText(timeLeftFormatted);
+        seekBar.setProgress(valueMinute);
     }
 
     @Override
@@ -318,15 +324,35 @@ public class TimerActivity extends AppCompatActivity implements ListFragment.Cal
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        if (item.getItemId() == android.R.id.home) {
-            onBackPressed();
+        switch (item.getItemId()) {
+            case R.id.item_info:
+                new PromptDialog(this)
+                        .setDialogType(PromptDialog.DIALOG_TYPE_INFO)
+                        .setAnimationEnable(true)
+                        .setTitleText("Техника Pomodoro")
+                        .setContentText("Возьмите лист бумаги и озаглавьте его «Задачи на сегодня». " +
+                                "Учитывая приоритеты (от более к менее важным), составьте список всех задач на сегодня. " +
+                                "После этого установите таймер на 25 минут и начинайте работать. " +
+                                "Звонок таймера означает наступление 5-минутного отдыха")
+                        .setPositiveListener("OK", new PromptDialog.OnPositiveListener() {
+                            @Override
+                            public void onClick(PromptDialog dialog) {
+                                dialog.dismiss();
+                            }
+                        }).show();
+                return true;
+
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     public void notification() {
         int notId = 1;
-        String title = "Diary";
+        String title = "Расписание";
         String text = "Таймер - 00:00";
 
         Intent mainIntent = new Intent(getApplicationContext(), TimerActivity.class);

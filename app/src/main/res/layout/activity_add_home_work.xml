@@ -16,6 +16,46 @@
         app:layout_scrollFlags="scroll|enterAlways"
         app:title="Добавить домашнее задание " />
 
+    <Switch
+        android:id="@+id/hwadd_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/rus2"
+        android:text="Напоминание"
+        android:textColor="@color/text_blueDark"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:theme="@style/BlackTheme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.038"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_add_hw"
+        app:layout_constraintVertical_bias="0.019" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/hwadd_fab_keyboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:theme="@style/BlackTheme"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.975"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_add_hw"
+        app:layout_constraintVertical_bias="0.017"
+        app:srcCompat="@drawable/ic_keyboard_white" />
+
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
@@ -24,18 +64,18 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:fontFamily="@font/rus2"
         android:gravity="center_vertical"
         android:text="Предмет"
         android:textColor="@color/white"
         android:textSize="20dp"
-        android:fontFamily="@font/rus2"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.028"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.155" />
+        app:layout_constraintVertical_bias="0.218" />
 
     <Spinner
         android:id="@+id/hwadd_object_sp"
@@ -53,7 +93,7 @@
         app:layout_constraintHorizontal_bias="0.956"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.172" />
+        app:layout_constraintVertical_bias="0.234" />
 
     <TextView
         android:id="@+id/textViewDay"
@@ -63,18 +103,18 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:fontFamily="@font/rus2"
         android:gravity="center_vertical"
         android:text="Выберите дату"
         android:textColor="@color/white"
         android:textSize="20dp"
-        android:fontFamily="@font/rus2"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.035"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.305" />
+        app:layout_constraintVertical_bias="0.378" />
 
 
     <Button
@@ -92,8 +132,9 @@
         app:layout_constraintHorizontal_bias="0.965"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.315" />
+        app:layout_constraintVertical_bias="0.387" />
 
+    <!--
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="150dp"
@@ -108,7 +149,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_add_object"
         app:layout_constraintVertical_bias="0.776"
-        app:srcCompat="@mipmap/ic_launcher" />
+        app:srcCompat="@mipmap/ic_launcher"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_hw_delimage"
@@ -128,7 +169,7 @@
         app:layout_constraintVertical_bias="0.675"
         app:srcCompat="@drawable/ic_delfile_white" />
 
-
+ -->
     <TextView
         android:id="@+id/hwadd_test"
         android:layout_width="wrap_content"
@@ -136,8 +177,8 @@
 
     <EditText
         android:id="@+id/hwadd_task"
-        android:layout_width="299dp"
-        android:layout_height="83dp"
+        android:layout_width="match_parent"
+        android:layout_height="95dp"
         android:layout_marginBottom="184dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -146,10 +187,66 @@
         android:inputType="textMultiLine"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.173"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.801" />
+        app:layout_constraintVertical_bias="0.948" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_hw_timeadd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:clickable="true"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.935"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hwadd_task"
+        app:layout_constraintVertical_bias="0.293"
+        app:srcCompat="@drawable/ic_timer_white" />
+
+    <EditText
+        android:id="@+id/et_hw_timeview"
+        android:layout_width="81dp"
+        android:layout_height="46dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:focusable="false"
+        android:hint=""
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.686"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hwadd_task"
+        app:layout_constraintVertical_bias="0.306" />
+
+    <Button
+        android:id="@+id/hwadd_dateRem_bt"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/rus2"
+        android:text="Выберите дату"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.094"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hwadd_task"
+        app:layout_constraintVertical_bias="0.315" />
 
     <Button
         android:id="@+id/hwadd_btn_send"
@@ -171,6 +268,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.984" />
 
+    <!--
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/hwadd_fab_image"
         android:layout_width="wrap_content"
@@ -187,5 +285,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.499"
         app:srcCompat="@drawable/ic_addfile_white" />
+
+    -->
 
 </android.support.constraint.ConstraintLayout>
