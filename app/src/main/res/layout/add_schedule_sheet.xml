@@ -190,7 +190,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:background="@drawable/border"
+        android:background="@drawable/border_blue"
         android:text="Добавить"
         android:fontFamily="@font/font_prog"
         android:textColor="@color/white"

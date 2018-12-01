@@ -53,45 +53,47 @@ import cn.refactor.lib.colordialog.PromptDialog;
 
 public class AddHomeWorkActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
 
-    public DBHomeWorkHelper dbSQL;
-    public DBObjectHelper dbSQL2;
-    public SQLiteDatabase sqLiteDatabase;
-    public Spinner objectSpinner;
-    public String object;
-    public int teacherPos;
-    public Button btn_send;
-    public Button datePicker;
-    public Button dateReminder;
-    public FloatingActionButton timeReminder;
-    public FloatingActionButton keyboard;
-    public Switch reminderSwitch;
     private final int Pick_imageNo = 0;
-    public EditText task;
-    public EditText time_view;
-    Cursor cursor;
-    String[] objects;
-    private ArrayList<ObjectList> objectLists;
-
-    private final int Pick_image = 1;
     public String date = "";
     public String date_sort = "";
     public String dateReminderText = "";
     public String hour;
     public String minute;
+    public String temp;
+    public String object;
+    public String[] objects;
+    public int teacherPos;
     public int year;
     public int month;
     public int day;
+    public Date time;
     public Boolean flag1 = false;
     public Boolean flagDate = false;
     public Boolean flagDateReminder = false;
-    public Date time;
-    // private FloatingActionButton imageSelect;
-    String temp;
-    private Boolean flagEnd = false;
-    // private ImageView imageView;
-    private Bitmap selectedImage;
-    //private FloatingActionButton deleteImage;
+
+    public DBHomeWorkHelper dbSQL;
+    public DBObjectHelper dbSQL2;
+    public SQLiteDatabase sqLiteDatabase;
+
+    public Button btn_send;
+    public Button datePicker;
+    public Button dateReminder;
+    public FloatingActionButton timeReminder;
+    public FloatingActionButton keyboard;
+    public Spinner objectSpinner;
+    public Switch reminderSwitch;
+    public EditText task;
+    public EditText time_view;
+    public Cursor cursor;
+    private ArrayList<ObjectList> objectLists;
+    private final int Pick_image = 1;
     private Uri imageUri;
+    private Bitmap selectedImage;
+    private Boolean flagEnd = false;
+
+    // private FloatingActionButton imageSelect;
+    // private ImageView imageView;
+    //private FloatingActionButton deleteImage;
 
     private static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
         final int height = options.outHeight;
@@ -248,6 +250,7 @@ public class AddHomeWorkActivity extends AppCompatActivity implements TimePicker
                 objectLists.add(object1);
             } while (cursor.moveToNext());
         }
+        cursor.close();
         objects = new String[objectLists.size()];
         for (int i = 0; i < objects.length; i++) {
             objects[i] = objectLists.get(i).getObject();

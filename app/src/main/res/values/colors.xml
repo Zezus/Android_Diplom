@@ -6,7 +6,7 @@
     <color name="accent_material_light_1">#d640ffff</color>
     <color name="accent_material_light_2">#d540ffff</color>
     <color name="white">#ffffff</color>
-    <color name="redDark">#040404</color>
+    <color name="redDark">#800000</color>
     <color name="black">#0a0e33</color>
     <color name="blackRock">#0a0e33</color>
     <color name="bluePantone">#0023ab</color>
@@ -18,4 +18,5 @@
     <color name="blueDark_main">#1b2936</color>
     <color name="text_blueDark">#5f99c9</color>
     <color name="BlueDark2">#233446</color>
+    <color name="green">#2fc602</color>
 </resources>

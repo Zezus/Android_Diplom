@@ -55,6 +55,7 @@ public class ObjectFragment extends Fragment {
                 objectLists.add(object1);
             } while (cursor.moveToNext());
         }
+        cursor.close();
 
         itemRecyclerView.setAdapter(new ObjectAdapter(getContext(), objectLists, (ObjectActivity) getActivity()));
 

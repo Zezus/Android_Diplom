@@ -54,6 +54,7 @@ public class NoteFragment extends Fragment {
                 noteLists.add(note1);
             } while (cursor.moveToNext());
         }
+        cursor.close();
 
         noteRecyclerView.setAdapter(new NoteAdapter(getContext(), noteLists, (NoteActivity) getActivity()));
 

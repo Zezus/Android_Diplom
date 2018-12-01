@@ -140,7 +140,7 @@
                 android:maxHeight="@dimen/image_size"
                 android:maxWidth="@dimen/image_size"
                 android:adjustViewBounds="true"
-                android:background="@drawable/border"
+                android:background="@drawable/border_blue"
                 app:srcCompat="@mipmap/icon" />
 
 

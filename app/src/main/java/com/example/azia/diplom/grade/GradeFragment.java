@@ -59,6 +59,7 @@ public class GradeFragment extends Fragment {
 
         gradeRecyclerView.setAdapter(new GradeAdapter(getContext(), gradeLists, (GradeActivity) getActivity()));
 
+        cursor.close();
         return view;
     }
 }

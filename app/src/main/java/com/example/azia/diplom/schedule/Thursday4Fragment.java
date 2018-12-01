@@ -76,6 +76,7 @@ public class Thursday4Fragment extends Fragment {
                 }
             } while (cursor.moveToNext());
         }
+        cursor.close();
 
         Collections.sort(scheduleLists, new Comparator<ScheduleList>() {
             @Override

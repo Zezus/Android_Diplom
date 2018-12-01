@@ -148,6 +148,7 @@ public class AddScheduleSheet extends BottomSheetDialogFragment implements TimeP
                 objectLists.add(object1);
             } while (cursor.moveToNext());
         }
+        cursor.close();
         objects = new String[objectLists.size()];
         for (int i = 0; i < objects.length; i++) {
             objects[i] = objectLists.get(i).getObject();

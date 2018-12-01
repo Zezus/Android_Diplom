@@ -111,7 +111,6 @@ public class GradeAdapter extends RecyclerView.Adapter<GradeAdapter.ViewHolder> 
                 }
             }
         });
-
         holder.deleteBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -128,52 +127,6 @@ public class GradeAdapter extends RecyclerView.Adapter<GradeAdapter.ViewHolder> 
                 context.startActivity(intent);
             }
         });
-        /*holder.delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ColorDialog dialog = new ColorDialog(context);
-                dialog.setTitle("Удаление");
-                dialog.setContentText("Вы уверены, что хотите удалить запичь?");
-                //dialog.setContentImage(getResources().getDrawable(R.mipmap.sample_img));
-                dialog.setPositiveListener("ДА", new ColorDialog.OnPositiveListener() {
-                    @Override
-                    public void onClick(ColorDialog dialog) {
-                        dbSQL.deleteInfo(String.valueOf(gradeList.getId()), sqLiteDatabase);
-                        TastyToast.makeText(context, "Запись удалена !", TastyToast.LENGTH_LONG,
-                                TastyToast.INFO);
-                        dbSQL.close();
-                        dialog.cancel();
-                        Intent intent = new Intent(context, NoteActivity.class);
-                        context.startActivity(intent);
-                    }
-                })
-                        .setNegativeListener("НЕТ", new ColorDialog.OnNegativeListener() {
-                            @Override
-                            public void onClick(ColorDialog dialog) {
-                                dialog.cancel();
-                            }
-                        }).show();
-//                AlertDialog.Builder aldial = new AlertDialog.Builder(context);
-//                aldial.setMessage("Удалить предмет?").setCancelable(false)
-//                        .setPositiveButton("Да", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                dbSQL.deleteInfo(String.valueOf(objectList.getId()), sqLiteDatabase);
-//                                Toast.makeText(context, "Предмет удален", Toast.LENGTH_LONG).show();
-//                                dbSQL.close();
-//                            }
-//                        })
-//                        .setNegativeButton("Нет", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                dialog.cancel();
-//                            }
-//                        });
-//                AlertDialog alert = aldial.create();
-//                alert.setTitle("Program");
-//                alert.show();
-            }
-        });*/
     }
 
     @Override
@@ -189,7 +142,6 @@ public class GradeAdapter extends RecyclerView.Adapter<GradeAdapter.ViewHolder> 
         EditText addgradeET;
         Button updateBT;
         Button deleteBT;
-        // FloatingActionButton delete;
 
 
         public ViewHolder(View itemView) {
@@ -201,7 +153,6 @@ public class GradeAdapter extends RecyclerView.Adapter<GradeAdapter.ViewHolder> 
             addgradeET = itemView.findViewById(R.id.grade_et_addgrade);
             updateBT = itemView.findViewById(R.id.grade_btn_update);
             deleteBT = itemView.findViewById(R.id.grade_btn_del);
-            // delete = itemView.findViewById(R.id.del_grade);
 
         }
     }

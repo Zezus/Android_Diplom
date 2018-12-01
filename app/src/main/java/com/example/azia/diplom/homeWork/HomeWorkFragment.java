@@ -75,6 +75,7 @@ public class HomeWorkFragment extends Fragment {
                 homeWorkLists.add(homeWork1);
             } while (cursor.moveToNext());
         }
+        cursor.close();
 
         /*Collections.sort(homeWorkLists, new Comparator<HomeWorkList>() {
             @Override

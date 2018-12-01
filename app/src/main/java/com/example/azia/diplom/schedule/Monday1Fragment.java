@@ -91,6 +91,7 @@ public class Monday1Fragment extends ListFragment {
         scheduleListAdapter.notifyDataSetChanged();
         mList.setAdapter(scheduleListAdapter);
 
+        cursor.close();
         return view;
     }
 
