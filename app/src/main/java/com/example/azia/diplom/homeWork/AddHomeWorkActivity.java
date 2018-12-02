@@ -283,91 +283,118 @@ public class AddHomeWorkActivity extends AppCompatActivity implements TimePicker
 
 
         btn_send.setOnClickListener(view -> {
-            flagEnd = false;
-            String object_v = object;
-            String task_v = task.getText().toString();
-            String date_v = date.toString();
-            String teacher_v = objectLists.get(teacherPos).getTeacher();
-            String image_v;
-            if (imageUri == null) {
-                image_v = "";
-            } else image_v = imageUri.toString();
-            String date_sort_v = date_sort.toString();
+            if (objectLists.size() != 0) {
+                flagEnd = false;
+                String object_v = object;
+                String task_v = task.getText().toString();
+                String date_v = date.toString();
+                String teacher_v = objectLists.get(teacherPos).getTeacher();
+                String image_v;
+                if (imageUri == null) {
+                    image_v = "";
+                } else image_v = imageUri.toString();
+                String date_sort_v = date_sort.toString();
 
-            if (object_v.length() == 0 || task_v.length() == 0 || date_v.length() == 0 || teacher_v.length() == 0) {
-                new PromptDialog(this)
-                        .setDialogType(PromptDialog.DIALOG_TYPE_WARNING)
-                        .setAnimationEnable(true)
-                        .setTitleText("")
-                        .setContentText("Заполните все поля")
-                        .setPositiveListener("OK", new PromptDialog.OnPositiveListener() {
-                            @Override
-                            public void onClick(PromptDialog dialog) {
-                                dialog.dismiss();
-                            }
-                        }).show();
-            } else {
+                if (object_v.length() == 0 || task_v.length() == 0 || date_v.length() == 0 || teacher_v.length() == 0) {
+                    new PromptDialog(this)
+                            .setDialogType(PromptDialog.DIALOG_TYPE_WARNING)
+                            .setAnimationEnable(true)
+                            .setTitleText("")
+                            .setContentText("Заполните все поля")
+                            .setPositiveListener("OK", new PromptDialog.OnPositiveListener() {
+                                @Override
+                                public void onClick(PromptDialog dialog) {
+                                    dialog.dismiss();
+                                }
+                            }).show();
+                } else {
 
-                if (reminderSwitch.isChecked()) {
+                    if (reminderSwitch.isChecked()) {
 
-                    int text_timeView = time_view.length();
-                    String text_dateReminder = dateReminder.getText().toString();
+                        int text_timeView = time_view.length();
+                        String text_dateReminder = dateReminder.getText().toString();
 
-                    if (text_timeView != 0 && text_dateReminder != "Выберите дату") {
-                        Calendar cal = Calendar.getInstance();
-                        cal.set(Calendar.HOUR_OF_DAY, Integer.valueOf(hour));
-                        cal.set(Calendar.MINUTE, Integer.valueOf(minute));
-                        cal.set(Calendar.YEAR, year);
-                        cal.set(Calendar.MONTH, month);
-                        cal.set(Calendar.DAY_OF_MONTH, day);
-                        time = cal.getTime();
+                        if (text_timeView != 0 && text_dateReminder != "Выберите дату") {
+                            Calendar cal = Calendar.getInstance();
+                            cal.set(Calendar.HOUR_OF_DAY, Integer.valueOf(hour));
+                            cal.set(Calendar.MINUTE, Integer.valueOf(minute));
+                            cal.set(Calendar.YEAR, year);
+                            cal.set(Calendar.MONTH, month);
+                            cal.set(Calendar.DAY_OF_MONTH, day);
+                            time = cal.getTime();
 
-                        ContentResolver cr = getApplicationContext().getContentResolver();
-                        ContentValues calEvent = new ContentValues();
-                        calEvent.put(CalendarContract.Events.CALENDAR_ID, 1); // XXX pick)
-                        calEvent.put(CalendarContract.Events.TITLE, "Расписание! Домашнее задание");
-                        calEvent.put(CalendarContract.Events.DESCRIPTION, task_v);
-                        calEvent.put(CalendarContract.Events.DTSTART, time.getTime());
-                        calEvent.put(CalendarContract.Events.DTEND, time.getTime() + (60 * 60 * 1000));
-                        calEvent.put(CalendarContract.Events.HAS_ALARM, 1);
-                        calEvent.put(CalendarContract.Events.EVENT_TIMEZONE, CalendarContract.Calendars.CALENDAR_TIME_ZONE);
+                            ContentResolver cr = getApplicationContext().getContentResolver();
+                            ContentValues calEvent = new ContentValues();
+                            calEvent.put(CalendarContract.Events.CALENDAR_ID, 1); // XXX pick)
+                            calEvent.put(CalendarContract.Events.TITLE, "Расписание! Домашнее задание");
+                            calEvent.put(CalendarContract.Events.DESCRIPTION, task_v);
+                            calEvent.put(CalendarContract.Events.DTSTART, time.getTime());
+                            calEvent.put(CalendarContract.Events.DTEND, time.getTime() + (60 * 60 * 1000));
+                            calEvent.put(CalendarContract.Events.HAS_ALARM, 1);
+                            calEvent.put(CalendarContract.Events.EVENT_TIMEZONE, CalendarContract.Calendars.CALENDAR_TIME_ZONE);
 
 //save an event
-                        @SuppressLint("MissingPermission") final Uri uri = cr.insert(CalendarContract.Events.CONTENT_URI, calEvent);
+                            @SuppressLint("MissingPermission") final Uri uri = cr.insert(CalendarContract.Events.CONTENT_URI, calEvent);
 
-                        int dbId = Integer.parseInt(uri.getLastPathSegment());
+                            int dbId = Integer.parseInt(uri.getLastPathSegment());
 
 //Now create a reminder and attach to the reminder
-                        ContentValues reminders = new ContentValues();
-                        reminders.put(CalendarContract.Reminders.EVENT_ID, dbId);
-                        reminders.put(CalendarContract.Reminders.METHOD, CalendarContract.Reminders.METHOD_ALERT);
-                        reminders.put(CalendarContract.Reminders.MINUTES, 0);
+                            ContentValues reminders = new ContentValues();
+                            reminders.put(CalendarContract.Reminders.EVENT_ID, dbId);
+                            reminders.put(CalendarContract.Reminders.METHOD, CalendarContract.Reminders.METHOD_ALERT);
+                            reminders.put(CalendarContract.Reminders.MINUTES, 0);
 
-                        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_CALENDAR) != PackageManager.PERMISSION_GRANTED) {
-                            return;
-                        }
-                        final Uri reminder = cr.insert(CalendarContract.Reminders.CONTENT_URI, reminders);
+                            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_CALENDAR) != PackageManager.PERMISSION_GRANTED) {
+                                return;
+                            }
+                            final Uri reminder = cr.insert(CalendarContract.Reminders.CONTENT_URI, reminders);
 
-                        int added = Integer.parseInt(reminder.getLastPathSegment());
+                            int added = Integer.parseInt(reminder.getLastPathSegment());
 
 //this means reminder is added
-                        if (added > 0) {
-                            Intent vieww = new Intent(Intent.ACTION_VIEW);
-                            vieww.setData(uri); // enter the uri of the event not the reminder
+                            if (added > 0) {
+                                Intent vieww = new Intent(Intent.ACTION_VIEW);
+                                vieww.setData(uri); // enter the uri of the event not the reminder
 
-                            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT_WATCH) {
-                                vieww.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                                        | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP
-                                        | Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
-                            } else {
-                                vieww.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
-                                        Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP |
-                                        Intent.FLAG_ACTIVITY_NO_HISTORY |
-                                        Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+                                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT_WATCH) {
+                                    vieww.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                                            | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP
+                                            | Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+                                } else {
+                                    vieww.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
+                                            Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                                            Intent.FLAG_ACTIVITY_NO_HISTORY |
+                                            Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+                                }
+
                             }
 
+                            dbSQL = new DBHomeWorkHelper(getApplicationContext());
+                            sqLiteDatabase = dbSQL.getWritableDatabase();
+                            dbSQL.addInfo(object_v, task_v, date_v, teacher_v, image_v, date_sort_v, sqLiteDatabase);
+                            //dbSQL.addInfo(object_v, task_v, date_v, teacher_v, sqLiteDatabase);
+                            TastyToast.makeText(getApplicationContext(), "Домашнее задание добавлено ", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
+                            dbSQL.close();
+
+
+                            Intent intent = new Intent();
+                            intent.setClass(AddHomeWorkActivity.this, HomeWorkActivity.class);
+                            startActivity(intent);
+                        } else {
+                            new PromptDialog(this)
+                                    .setDialogType(PromptDialog.DIALOG_TYPE_WARNING)
+                                    .setAnimationEnable(true)
+                                    .setTitleText("")
+                                    .setContentText("Заполните дату и время для напоминания")
+                                    .setPositiveListener("OK", new PromptDialog.OnPositiveListener() {
+                                        @Override
+                                        public void onClick(PromptDialog dialog) {
+                                            dialog.dismiss();
+                                        }
+                                    }).show();
                         }
 
+                    } else {
                         dbSQL = new DBHomeWorkHelper(getApplicationContext());
                         sqLiteDatabase = dbSQL.getWritableDatabase();
                         dbSQL.addInfo(object_v, task_v, date_v, teacher_v, image_v, date_sort_v, sqLiteDatabase);
@@ -379,35 +406,21 @@ public class AddHomeWorkActivity extends AppCompatActivity implements TimePicker
                         Intent intent = new Intent();
                         intent.setClass(AddHomeWorkActivity.this, HomeWorkActivity.class);
                         startActivity(intent);
-                    } else {
-                        new PromptDialog(this)
-                                .setDialogType(PromptDialog.DIALOG_TYPE_WARNING)
-                                .setAnimationEnable(true)
-                                .setTitleText("")
-                                .setContentText("Заполните дату и время для напоминания")
-                                .setPositiveListener("OK", new PromptDialog.OnPositiveListener() {
-                                    @Override
-                                    public void onClick(PromptDialog dialog) {
-                                        dialog.dismiss();
-                                    }
-                                }).show();
                     }
-
-                } else {
-                    dbSQL = new DBHomeWorkHelper(getApplicationContext());
-                    sqLiteDatabase = dbSQL.getWritableDatabase();
-                    dbSQL.addInfo(object_v, task_v, date_v, teacher_v, image_v, date_sort_v, sqLiteDatabase);
-                    //dbSQL.addInfo(object_v, task_v, date_v, teacher_v, sqLiteDatabase);
-                    TastyToast.makeText(getApplicationContext(), "Домашнее задание добавлено ", TastyToast.LENGTH_LONG, TastyToast.SUCCESS);
-                    dbSQL.close();
-
-
-                    Intent intent = new Intent();
-                    intent.setClass(AddHomeWorkActivity.this, HomeWorkActivity.class);
-                    startActivity(intent);
                 }
+            } else {
+                new PromptDialog(AddHomeWorkActivity.this)
+                        .setDialogType(PromptDialog.DIALOG_TYPE_WARNING)
+                        .setAnimationEnable(true)
+                        .setTitleText("")
+                        .setContentText("Добавьте предмет")
+                        .setPositiveListener("OK", new PromptDialog.OnPositiveListener() {
+                            @Override
+                            public void onClick(PromptDialog dialog) {
+                                dialog.dismiss();
+                            }
+                        }).show();
             }
-
         });
 
     }
